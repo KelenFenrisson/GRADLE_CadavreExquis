@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GRADLE_CadavreExquis</string>
+    <string name="app_login">Identifiant</string>
+    <string name="app_password">Mot de passe</string>
+    <string name="app_title">Le Jeu Du Cadavre Exquis</string>
+    <string name="app_loginscreen_title">Ecran de connexion</string>
+    <string name="app_cancel">Annuler</string>
+    <string name="app_dummylogin">Joueur</string>
+    <string name="app_dummypassword">MotDePasse</string>
+    <string name="app_log_in">Se Connecter</string>
+    <string name="app_no">Non</string>
+    <string name="app_validate">Confirmer</string>
+    <string name="app_yes">Oui</string>
+    <string name="app_welcome">Bienvenue !</string>
+</resources>

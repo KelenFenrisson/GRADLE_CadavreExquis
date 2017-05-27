@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">GRADLE_CadavreExquis</string>
+    <string name="app_title">The Game of "CadavreExquis"</string>
+    <string name="app_welcome">Welcome !</string>
+    <string name="app_loginscreen_title">Login Screen</string>
+    <string name="app_login">Login</string>
+    <string name="app_password">Password</string>
+    <string name="app_dummylogin">Player</string>
+    <string name="app_dummypassword">Hunter2</string>
+    <string name="app_log_in">Log In</string>
+    <string name="app_validate">Confirm</string>
+    <string name="app_cancel">Cancel</string>
+    <string name="app_yes">Yes</string>
+    <string name="app_no">No</string>
+
 </resources>
