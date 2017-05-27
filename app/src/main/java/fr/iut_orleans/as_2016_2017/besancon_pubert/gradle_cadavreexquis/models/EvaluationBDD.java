@@ -23,7 +23,7 @@ public class EvaluationBDD {
     private static final String ID_TEXTE = CadavreExquisBDD.ID_TEXTE;
     private static final int NUM_COL_DATE=2;
     private static final String DATE_EVALUER = CadavreExquisBDD.DATE_EVALUER;
-    private static final int NUM_COL_NOTE=4;
+    private static final int NUM_COL_NOTE=3;
     private static final String NOTE_EVALUER = CadavreExquisBDD.NOTE_EVALUER;
     private static final int NUM_COL_COMMENTAIRE=4;
     private static final String COMMENTAIRE_EVALUER = CadavreExquisBDD.COMMENTAIRE_EVALUER;
@@ -98,7 +98,20 @@ public class EvaluationBDD {
         //On créé un utilisateur "vierge"
         Evaluation evaluation = new Evaluation();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
-        evaluation.setUtilisateur(null);
+            // On va choper l'utilisateur
+            UtilisateurBDD utilisateurBDD = new UtilisateurBDD(this.context);
+            utilisateurBDD.open();
+            Utilisateur utilisateur = utilisateurBDD.getUtilisateurWithID(c.getInt(NUM_COL_UTILISATEUR));
+            utilisateurBDD.close();
+        evaluation.setUtilisateur(utilisateur);
+
+            // On va choper le texte
+            TexteBDD texteBDD = new TexteBDD(this.context);
+            texteBDD.open();
+            Texte texte = texteBDD.getTexteWithID(c.getInt(NUM_COL_TEXTE));
+            texteBDD.close();
+        evaluation.setTexte(texte);
+
         evaluation.setDateEvaluation(new Date()); evaluation.getDateEvaluation().setTime(c.getInt(NUM_COL_DATE));
         evaluation.setNote(c.getInt(NUM_COL_NOTE));
         evaluation.setCommentaire(c.getString(NUM_COL_COMMENTAIRE));

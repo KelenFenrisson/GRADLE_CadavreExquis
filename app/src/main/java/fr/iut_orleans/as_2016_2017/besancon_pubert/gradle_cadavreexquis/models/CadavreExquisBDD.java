@@ -95,4 +95,5 @@ public class CadavreExquisBDD extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL("DROP TABLE " +TABLE_UTILISATEUR+";");
         onCreate(sqLiteDatabase);
     }
+
 }
