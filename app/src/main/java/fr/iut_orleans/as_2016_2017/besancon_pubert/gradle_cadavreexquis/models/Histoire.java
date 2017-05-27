@@ -19,22 +19,24 @@ public class Histoire
     public Histoire() {
         this.id = null;
         this.dateCreation = null;
-        this.textes = null;
-    }
-
-    public Histoire(int id, int date)
-    {
-        this.id = id;
-        this.dateCreation = new Date(date);
         this.textes = new ArrayList<>();
     }
 
-    public Histoire(int date)
+    public Histoire(Date date)
     {
         this.id = null;
-        this.dateCreation = new Date(date);
+        this.dateCreation = date;
         this.textes = new ArrayList<>();
     }
+
+    public Histoire(int id, Date date)
+    {
+        this.id = id;
+        this.dateCreation = date;
+        this.textes = new ArrayList<>();
+    }
+
+
 
     public Integer getId() {
         return id;

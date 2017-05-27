@@ -22,11 +22,12 @@ public class UtilisateurBDD {
     private static final int NUM_COL_MDP=2;
     private static final String MDP_UTILISATEUR = CadavreExquisBDD.MDP_UTILISATEUR;
 
+    private Context context;
     private SQLiteDatabase sqliteDatabase;
-
     private CadavreExquisBDD cadavreExquisBDD;
 
     public UtilisateurBDD(Context context){
+        this.context = context;
         this.cadavreExquisBDD = new CadavreExquisBDD(context, NOM_BDD, null, VERSION_BDD);
     }
     public void open(){

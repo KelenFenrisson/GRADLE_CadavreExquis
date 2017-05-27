@@ -28,11 +28,14 @@ public class TexteBDD {
     private static final int NUM_COL_HISTOIRE=4;
     private static final String ID_HISTOIRE = CadavreExquisBDD.ID_HISTOIRE;
 
+    private Context context;
+
     private SQLiteDatabase sqliteDatabase;
 
     private CadavreExquisBDD cadavreExquisBDD;
 
     public TexteBDD(Context context){
+        this.context = context;
         this.cadavreExquisBDD = new CadavreExquisBDD(context, NOM_BDD, null, VERSION_BDD);
     }
     public void open(){
@@ -53,10 +56,17 @@ public class TexteBDD {
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
-        values.put(ID_UTILISATEUR, texte.getUtilisateur().getId());
-        values.put(DATE_TEXTE, texte.getDate().getTime());
-        values.put(CONTENU_TEXTE, texte.getContenu());
-        values.put(ID_HISTOIRE, texte.getHistoire().getId());
+
+        if((texte.getUtilisateur() != null && this.hasUtilisateur(texte)) && (texte.getHistoire() != null && this.hasHistoire(texte)))
+        {
+            values.put(ID_UTILISATEUR, texte.getUtilisateur().getId());
+
+            values.put(DATE_TEXTE, texte.getDate().getTime());
+
+            values.put(CONTENU_TEXTE, texte.getContenu());
+
+            values.put(ID_HISTOIRE, texte.getHistoire().getId());
+        }
         //on insère l'objet dans la BDD via le ContentValues
         return this.sqliteDatabase.insert(TABLE_TEXTE, null, values);
     }
@@ -79,7 +89,7 @@ public class TexteBDD {
 
     public Texte getTexteWithID(int id){
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son id)
-        Cursor c = this.sqliteDatabase.query(TABLE_TEXTE, new String[] {ID_UTILISATEUR, DATE_TEXTE, CONTENU_TEXTE, ID_HISTOIRE}, ID_TEXTE + " = \"" + id +"\"", null, null, null, null);
+        Cursor c = this.sqliteDatabase.query(TABLE_TEXTE, new String[] {ID_TEXTE, ID_UTILISATEUR, DATE_TEXTE, CONTENU_TEXTE, ID_HISTOIRE}, ID_TEXTE + " = \"" + id +"\"", null, null, null, null);
         return this.cursorToTexte(c);
     }
 
@@ -95,13 +105,51 @@ public class TexteBDD {
         Texte texte = new Texte();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         texte.setId(c.getInt(NUM_COL_ID));
-        texte.setUtilisateur(null);
+
+            // On va choper l'utilisateur
+            UtilisateurBDD utilisateurBDD = new UtilisateurBDD(this.context);
+            utilisateurBDD.open();
+            Utilisateur utilisateur = utilisateurBDD.getUtilisateurWithID(c.getInt(NUM_COL_UTILISATEUR));
+            utilisateurBDD.close();
+
+        texte.setUtilisateur(utilisateur);
         texte.setDate(new Date()); texte.getDate().setTime(c.getInt(NUM_COL_DATE));
         texte.setContenu(c.getString(NUM_COL_CONTENU));
-        texte.setHistoire(null);
+
+            // On va choper l'Histoire
+            HistoireBDD histoireBDD = new HistoireBDD(this.context);
+            histoireBDD.open();
+            Histoire histoire = histoireBDD.getHistoireWithID(c.getInt(NUM_COL_HISTOIRE));
+            histoireBDD.close();
+
+        texte.setHistoire(histoire);
         //On ferme le cursor
         c.close();
         //On retourne l'utilisateur
         return texte;
+    }
+
+    public boolean hasUtilisateur(Texte texte){
+
+        boolean hasUtilisateur;
+        UtilisateurBDD utilisateurBDD = new UtilisateurBDD(this.context);
+
+        utilisateurBDD.open();
+        hasUtilisateur = utilisateurBDD.getUtilisateurWithID(texte.getUtilisateur().getId()) != null;
+        utilisateurBDD.close();
+
+        return hasUtilisateur;
+    }
+
+    public boolean hasHistoire(Texte texte){
+
+        boolean hasHistoire;
+        HistoireBDD histoireBDD = new HistoireBDD(this.context);
+
+        histoireBDD.open();
+        hasHistoire = histoireBDD.getHistoireWithID(texte.getHistoire().getId()) != null;
+        histoireBDD.close();
+
+        return hasHistoire;
     }
 }

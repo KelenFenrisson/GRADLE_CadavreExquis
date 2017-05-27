@@ -23,11 +23,12 @@ public class HistoireBDD {
     private static final String DATE_HISTOIRE = CadavreExquisBDD.DATECREATION_HISTOIRE;
 
 
+    private Context context;
     private SQLiteDatabase sqliteDatabase;
-
     private CadavreExquisBDD cadavreExquisBDD;
 
     public HistoireBDD(Context context){
+        this.context = context;
         this.cadavreExquisBDD = new CadavreExquisBDD(context, NOM_BDD, null, VERSION_BDD);
     }
     public void open(){
@@ -44,7 +45,7 @@ public class HistoireBDD {
         return this.sqliteDatabase;
     }
 
-    public long insertTexte(Histoire histoire){
+    public long insertHistoire(Histoire histoire){
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
@@ -53,16 +54,16 @@ public class HistoireBDD {
         return this.sqliteDatabase.insert(TABLE_HISTOIRE, null, values);
     }
 
-    public int updateTexte(int id, Histoire histoire){
+    public int updateHistoire(int id, Histoire histoire){
         //La mise à jour d'un utilisateur dans la BDD fonctionne plus ou moins comme une insertion
-        //il faut simple préciser quel utilisateur on doit mettre à jour grâce à l'ID
+        //il faut simplement préciser quelle histoire on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
         values.put(DATE_HISTOIRE, histoire.getDateCreation().getTime());
     return this.sqliteDatabase.update(TABLE_HISTOIRE, values, ID_HISTOIRE + " = " +id, null);
     }
 
-    public int removeLivreWithID(int id){
-        //Suppression d'un livre de la BDD grâce à l'ID
+    public int removeHistoireWithID(int id){
+        //Suppression d'une histoire de la BDD grâce à l'ID
     return this.sqliteDatabase.delete(TABLE_HISTOIRE, ID_HISTOIRE + " = " +id, null);
     }
 
@@ -72,7 +73,7 @@ public class HistoireBDD {
         return this.cursorToHistoire(c);
     }
 
-    //Cette méthode permet de convertir un cursor en un utilisateur
+    //Cette méthode permet de convertir un cursor en un histoire
     private Histoire cursorToHistoire(Cursor c) {
         //si aucun élément n'a été retourné dans la requête, on renvoie null
         if (c.getCount() == 0)
@@ -80,7 +81,7 @@ public class HistoireBDD {
 
         //Sinon on se place sur le premier élément
         c.moveToFirst();
-        //On créé un utilisateur "vierge"
+        //On créé une histoire "vierge"
         Histoire histoire = new Histoire();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         histoire.setId(c.getInt(NUM_COL_ID));

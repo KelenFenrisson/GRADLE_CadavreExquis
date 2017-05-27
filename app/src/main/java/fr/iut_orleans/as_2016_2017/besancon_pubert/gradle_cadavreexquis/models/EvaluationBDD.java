@@ -29,11 +29,12 @@ public class EvaluationBDD {
     private static final String COMMENTAIRE_EVALUER = CadavreExquisBDD.COMMENTAIRE_EVALUER;
 
 
+    private Context context;
     private SQLiteDatabase sqliteDatabase;
-
     private CadavreExquisBDD cadavreExquisBDD;
 
     public EvaluationBDD(Context context){
+        this.context = context;
         this.cadavreExquisBDD = new CadavreExquisBDD(context, NOM_BDD, null, VERSION_BDD);
     }
     public void open(){
