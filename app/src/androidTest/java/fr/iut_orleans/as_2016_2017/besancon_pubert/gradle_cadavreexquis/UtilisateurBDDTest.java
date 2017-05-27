@@ -34,6 +34,8 @@ public class UtilisateurBDDTest{
     private String nouveauMdpUtilisateur;
 
 
+
+
     @Before
     public void setUp() throws Exception{
         appContext = InstrumentationRegistry.getTargetContext();
@@ -51,12 +53,16 @@ public class UtilisateurBDDTest{
 
         //Insertions
         utilisateurBDD.insertUtilisateur(new Utilisateur(nomUtilisateur, mdpUtilisateur));
-
     }
+
+
+
 
     @Test
     public void getUtilisateurWithIDTest() throws Exception {
 
+        //Insertions
+        utilisateurBDD.insertUtilisateur(new Utilisateur(nomUtilisateur, mdpUtilisateur));
         //Recuperation par Login
         Utilisateur utilisateur = utilisateurBDD.getUtilisateurWithID(1);
 
@@ -67,6 +73,8 @@ public class UtilisateurBDDTest{
     @Test
     public void getUtilisateurWithLoginTest() throws Exception {
 
+        //Insertions
+        utilisateurBDD.insertUtilisateur(new Utilisateur(nomUtilisateur, mdpUtilisateur));
         //Recuperation par Login
         Utilisateur utilisateur = utilisateurBDD.getUtilisateurWithLogin(nomUtilisateur);
 
@@ -77,6 +85,9 @@ public class UtilisateurBDDTest{
     @Test
     public void updateUtilisateurTest() throws Exception {
 
+        //Insertions
+        utilisateurBDD.insertUtilisateur(new Utilisateur(nomUtilisateur, mdpUtilisateur));
+
         utilisateurBDD.updateUtilisateur(1, new Utilisateur(nouveauNomUtilisateur, nouveauMdpUtilisateur));
 
         assertEquals("Modification d'un utilisateur ", new Utilisateur(1, nouveauNomUtilisateur, nouveauMdpUtilisateur), utilisateurBDD.getUtilisateurWithID(1));
@@ -86,6 +97,8 @@ public class UtilisateurBDDTest{
     @Test
     public void removeUtilisateurTest() throws Exception {
 
+        //Insertions
+        utilisateurBDD.insertUtilisateur(new Utilisateur(nomUtilisateur, mdpUtilisateur));
         utilisateurBDD.removeUtilisateurWithID(1);
 
         assertEquals("Suppression d'un utilisateur ", null, utilisateurBDD.getUtilisateurWithID(1));
@@ -94,9 +107,9 @@ public class UtilisateurBDDTest{
 
     @After
     public void tearDown(){
-        utilisateurBDD.close();
         utilisateurBDD.getBDD().execSQL("DROP TABLE "+ CadavreExquisBDD.TABLE_UTILISATEUR);
         utilisateurBDD.getBDD().execSQL(CadavreExquisBDD.CREATE_TABLE_UTILISATEUR);
+        utilisateurBDD.close();
     }
 
 }

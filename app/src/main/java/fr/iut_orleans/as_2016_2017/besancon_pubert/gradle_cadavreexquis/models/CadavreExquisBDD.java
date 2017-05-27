@@ -75,11 +75,6 @@ public class CadavreExquisBDD extends SQLiteOpenHelper{
                     "  FOREIGN KEY ("+ID_TEXTE+") REFERENCES "+TABLE_TEXTE+"("+ID_TEXTE+")"+
                     ");";
 
-
-
-
-
-
     public CadavreExquisBDD(Context context, String name, CursorFactory cursorFactory, int version){
         super(context, name, cursorFactory, version);
     }
