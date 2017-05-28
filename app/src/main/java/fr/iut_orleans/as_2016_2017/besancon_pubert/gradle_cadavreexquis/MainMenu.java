@@ -14,9 +14,9 @@ public class MainMenu extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_mainmenu);
         Intent intent = getIntent ();
-        String message = "Bonjour, "+intent.getStringExtra("text");
-        //TextView texte = (TextView)findViewById(R.id.textView);
-        //texte.setText(message);
+        String message = "Bonjour, "+intent.getStringExtra("nomUser");
+        TextView texte = (TextView)findViewById(R.id.textView);
+        texte.setText(message);
     }
 
     public void jouer(View view){
