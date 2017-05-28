@@ -20,47 +20,47 @@ public class TexteTest {
     private Date nouveauDate = new Date(123457);
     private String contenu = "Il etait un foie";
     private String nouveauContenu = "Il etait une fois";
-    private Utilisateur utilisateur = new Utilisateur(1,"Utilisateur", "MotDePasse");
-    private Utilisateur nouveauUtilisateur = new Utilisateur(2,"AutreUtilisateur", "AutreMotDePasse");
-    private Histoire histoire = new Histoire(new Date(123456), "Titre");
-    private Histoire nouveauHistoire = new Histoire(new Date(123457), "Titre");
+    private Integer utilisateur_id = 1;
+    private Integer nouveauUtilisateur_id = 2;
+    private Integer histoire_id = 1;
+    private Integer nouveauHistoire_id = 1;
 
     @Test
     public void getId() throws Exception {
 
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         assertEquals(id, t.getId().intValue());
 
     }
 
     @Test
     public void getDate() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         assertEquals(date, t.getDate());
 
     }
 
     @Test
     public void getContenu() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         assertEquals(contenu, t.getContenu());
     }
 
     @Test
     public void getUtilisateur() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
-        assertEquals(utilisateur, t.getUtilisateur());
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
+        assertEquals(utilisateur_id, t.getUtilisateur_id());
     }
 
     @Test
     public void getHistoire() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
-        assertEquals(histoire, t.getHistoire());
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
+        assertEquals(histoire_id, t.getHistoire_id());
     }
 
     @Test
     public void setId() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         t.setId(nouveauId);
         assertEquals(nouveauId, t.getId().intValue());
 
@@ -68,30 +68,30 @@ public class TexteTest {
 
     @Test
     public void setDate() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         t.setDate(nouveauDate);
         assertEquals(nouveauDate, t.getDate());
     }
 
     @Test
     public void setContenu() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
         t.setContenu(nouveauContenu);
         assertEquals(nouveauContenu, t.getContenu());
     }
 
     @Test
     public void setUtilisateur() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
-        t.setUtilisateur(nouveauUtilisateur);
-        assertEquals(nouveauUtilisateur, t.getUtilisateur());
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
+        t.setUtilisateur_id(nouveauUtilisateur_id);
+        assertEquals(nouveauUtilisateur_id, t.getUtilisateur_id());
     }
 
     @Test
     public void setHistoire() throws Exception {
-        Texte t = new Texte(id, date, contenu, utilisateur, histoire);
-        t.setHistoire(nouveauHistoire);
-        assertEquals(nouveauHistoire, t.getHistoire());
+        Texte t = new Texte(id, date, contenu, utilisateur_id, histoire_id);
+        t.setHistoire_id(nouveauHistoire_id);
+        assertEquals(nouveauHistoire_id, t.getHistoire_id());
     }
 
 }

@@ -56,18 +56,16 @@ public class Utilisateur
     }
 
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Utilisateur)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Utilisateur that = (Utilisateur) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(login, that.login) &&
                 Objects.equals(motDePasse, that.motDePasse);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
         return Objects.hash(id, login, motDePasse);

@@ -14,30 +14,30 @@ public class Texte {
     private Integer id;
     private Date date;
     private String contenu;
-    private Utilisateur utilisateur;
-    private Histoire histoire;
+    private Integer utilisateur_id;
+    private Integer histoire_id;
 
     public Texte() {
-        this.id = null;
+
         this.date = null;
         this.contenu = null;
-        this.utilisateur = null;
-        this.histoire = null;
+        this.utilisateur_id = null;
+        this.histoire_id = null;
     }
 
-    public Texte(Date date, String contenu, Utilisateur utilisateur, Histoire histoire) {
+    public Texte(Date date, String contenu, Integer utilisateur_id, Integer histoire_id) {
         this.date = date;
         this.contenu = contenu;
-        this.utilisateur = utilisateur;
-        this.histoire = histoire;
+        this.utilisateur_id = utilisateur_id;
+        this.histoire_id = histoire_id;
     }
 
-    public Texte(int id, Date date, String contenu, Utilisateur utilisateur, Histoire histoire) {
+    public Texte(Integer id, Date date, String contenu, Integer utilisateur_id, Integer histoire_id) {
         this.id = id;
         this.date = date;
         this.contenu = contenu;
-        this.utilisateur = utilisateur;
-        this.histoire = histoire;
+        this.utilisateur_id = utilisateur_id;
+        this.histoire_id = histoire_id;
     }
 
     public Integer getId() {
@@ -52,12 +52,12 @@ public class Texte {
         return contenu;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public Integer getUtilisateur_id() {
+        return utilisateur_id;
     }
 
-    public Histoire getHistoire() {
-        return histoire;
+    public Integer getHistoire_id() {
+        return histoire_id;
     }
 
     public void setId(Integer id) {
@@ -72,31 +72,29 @@ public class Texte {
         this.contenu = contenu;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUtilisateur_id(Integer utilisateur_id) {
+        this.utilisateur_id = utilisateur_id;
     }
 
-    public void setHistoire(Histoire histoire) {
-        this.histoire = histoire;
+    public void setHistoire_id(Integer histoire_id) {
+        this.histoire_id = histoire_id;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Texte)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Texte texte = (Texte) o;
         return Objects.equals(id, texte.id) &&
                 Objects.equals(date, texte.date) &&
                 Objects.equals(contenu, texte.contenu) &&
-                Objects.equals(utilisateur, texte.utilisateur) &&
-                Objects.equals(histoire, texte.histoire);
+                Objects.equals(utilisateur_id, texte.utilisateur_id) &&
+                Objects.equals(histoire_id, texte.histoire_id);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, contenu, utilisateur, histoire);
+        return Objects.hash(id, date, contenu, utilisateur_id, histoire_id);
     }
 
     @Override
@@ -105,8 +103,8 @@ public class Texte {
                 "id=" + id +
                 ", date=" + date +
                 ", contenu='" + contenu + '\'' +
-                ", utilisateur=" + utilisateur +
-                ", histoire=" + histoire +
+                ", utilisateur_id=" + utilisateur_id +
+                ", histoire_id=" + histoire_id +
                 '}';
     }
 }
