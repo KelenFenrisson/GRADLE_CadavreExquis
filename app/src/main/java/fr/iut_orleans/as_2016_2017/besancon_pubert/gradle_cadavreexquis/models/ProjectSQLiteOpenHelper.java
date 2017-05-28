@@ -27,11 +27,13 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
     public static final String TABLE_HISTOIRE = "HISTOIRE";
     public static final String ID_HISTOIRE = "id_histoire";
     public static final String DATECREATION_HISTOIRE = "datecreation_histoire";
+    public static final String TITRE_HISTOIRE = "titre_histoire";
     public static final String CREATE_TABLE_HISTOIRE =
             "CREATE TABLE "+TABLE_HISTOIRE+
                     " ( " +
                     ID_HISTOIRE+" INTEGER PRIMARY KEY,"+
-                    DATECREATION_HISTOIRE+" INTEGER"+
+                    DATECREATION_HISTOIRE+" INTEGER,"+
+                    TITRE_HISTOIRE+" VARCHAR(50)"+
                     ");";
     public static final String DROP_TABLE_HISTOIRE = "DROP TABLE IF EXISTS "+TABLE_HISTOIRE+";";
 

@@ -13,25 +13,29 @@ import java.util.Objects;
 public class Histoire
 {
     private Integer id;
+    private String titre;
     private Date dateCreation;
     private ArrayList<Texte> textes;
 
     public Histoire() {
         this.id = null;
+        this.titre=null;
         this.dateCreation = null;
         this.textes = new ArrayList<>();
     }
 
-    public Histoire(Date date)
+    public Histoire(Date date, String titre)
     {
         this.id = null;
+        this.titre=titre;
         this.dateCreation = date;
         this.textes = new ArrayList<>();
     }
 
-    public Histoire(int id, Date date)
+    public Histoire(int id, Date date, String titre)
     {
         this.id = id;
+        this.titre = titre;
         this.dateCreation = date;
         this.textes = new ArrayList<>();
     }
@@ -46,6 +50,10 @@ public class Histoire
         return dateCreation;
     }
 
+    public String getTitre() {
+        return titre;
+    }
+
     public ArrayList<Texte> getTextes() {
         return textes;
     }
@@ -56,6 +64,10 @@ public class Histoire
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public void setTextes(ArrayList<Texte> textes) {
@@ -76,7 +88,7 @@ public class Histoire
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateCreation, textes);
+        return Objects.hash(id, dateCreation, titre, textes);
     }
 
     @Override
@@ -84,6 +96,7 @@ public class Histoire
         return "Histoire{" +
                 "id=" + id +
                 ", dateCreation=" + dateCreation +
+                ", titre="+ titre +
                 ", textes=" + textes +
                 '}';
     }

@@ -1,4 +1,4 @@
-package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
+package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models;
 import org.junit.Test;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;

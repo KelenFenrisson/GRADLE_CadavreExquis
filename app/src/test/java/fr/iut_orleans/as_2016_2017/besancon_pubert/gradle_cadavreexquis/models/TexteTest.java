@@ -1,4 +1,4 @@
-package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
+package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models;
 import org.junit.Test;
 import java.util.Date;
 
@@ -22,8 +22,8 @@ public class TexteTest {
     private String nouveauContenu = "Il etait une fois";
     private Utilisateur utilisateur = new Utilisateur(1,"Utilisateur", "MotDePasse");
     private Utilisateur nouveauUtilisateur = new Utilisateur(2,"AutreUtilisateur", "AutreMotDePasse");
-    private Histoire histoire = new Histoire(123456);
-    private Histoire nouveauHistoire = new Histoire(123457);
+    private Histoire histoire = new Histoire(new Date(123456), "Titre");
+    private Histoire nouveauHistoire = new Histoire(new Date(123457), "Titre");
 
     @Test
     public void getId() throws Exception {

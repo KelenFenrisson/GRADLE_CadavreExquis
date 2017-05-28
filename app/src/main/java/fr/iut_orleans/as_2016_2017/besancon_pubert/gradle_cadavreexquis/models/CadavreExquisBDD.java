@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /* CadavreExquisBDD
@@ -28,6 +29,7 @@ public class CadavreExquisBDD {
 
     private static final String ID_HISTOIRE = ProjectSQLiteOpenHelper.ID_HISTOIRE;
     private static final String DATE_HISTOIRE = ProjectSQLiteOpenHelper.DATECREATION_HISTOIRE;
+    private static final String TITRE_HISTOIRE = ProjectSQLiteOpenHelper.TITRE_HISTOIRE;
 
     private static final String ID_TEXTE = ProjectSQLiteOpenHelper.ID_TEXTE;
     private static final String DATE_TEXTE = ProjectSQLiteOpenHelper.DATE_TEXTE;
@@ -45,6 +47,8 @@ public class CadavreExquisBDD {
     public static final String TABLE_HISTOIRE = ProjectSQLiteOpenHelper.TABLE_HISTOIRE;
     private static final int HISTOIRE_COL_ID=0;
     private static final int HISTOIRE_COL_DATE=1;
+    private static final int HISTOIRE_COL_TITRE=2;
+
 
     public static final String TABLE_TEXTE = ProjectSQLiteOpenHelper.TABLE_TEXTE;
     private static final int TEXTE_COL_ID=0;
@@ -167,6 +171,7 @@ public class CadavreExquisBDD {
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
         values.put(DATE_HISTOIRE, histoire.getDateCreation().getTime());
+        values.put(TITRE_HISTOIRE, histoire.getTitre());
         //on insère l'objet dans la BDD via le ContentValues
         return this.sqliteDatabase.insert(TABLE_HISTOIRE, null, values);
     }
@@ -176,6 +181,7 @@ public class CadavreExquisBDD {
         //il faut simplement préciser quelle histoire on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
         values.put(DATE_HISTOIRE, histoire.getDateCreation().getTime());
+        values.put(TITRE_HISTOIRE, histoire.getTitre());
         return this.sqliteDatabase.update(TABLE_HISTOIRE, values, ID_HISTOIRE + " = " +id, null);
     }
 
@@ -186,7 +192,7 @@ public class CadavreExquisBDD {
 
     public Histoire getHistoireWithID(int id){
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son login)
-        Cursor c = this.sqliteDatabase.query(TABLE_HISTOIRE, new String[] {ID_HISTOIRE, DATE_HISTOIRE}, ID_HISTOIRE + " = \"" + id +"\"", null, null, null, null);
+        Cursor c = this.sqliteDatabase.query(TABLE_HISTOIRE, new String[] {ID_HISTOIRE, DATE_HISTOIRE, TITRE_HISTOIRE}, ID_HISTOIRE + " = \"" + id +"\"", null, null, null, null);
         return this.cursorToHistoire(c);
     }
 
@@ -204,6 +210,8 @@ public class CadavreExquisBDD {
         histoire.setId(c.getInt(HISTOIRE_COL_ID));
         histoire.setDateCreation(new Date());
         histoire.getDateCreation().setTime(c.getInt(HISTOIRE_COL_DATE));
+        histoire.setTitre(c.getString(HISTOIRE_COL_TITRE));
+        histoire.setTextes(this.getTextesArrayListWithHistoireID(HISTOIRE_COL_ID));
         //On ferme le cursor
         c.close();
         //On retourne l'utilisateur
@@ -261,6 +269,28 @@ public class CadavreExquisBDD {
         return this.cursorToTexte(c);
     }
 
+
+    public ArrayList<Texte> getTextesArrayListWithHistoireID(int id){
+        Cursor c = this.sqliteDatabase.query(TABLE_TEXTE, new String[] {ID_TEXTE, ID_UTILISATEUR, DATE_TEXTE, CONTENU_TEXTE, ID_HISTOIRE}, ID_HISTOIRE + " = \"" + id +"\"", null, null, null, TEXTE_COL_DATE+" ASC");
+        return this.cursorToListeTexte(c);
+    }
+
+    private ArrayList<Texte> cursorToListeTexte(Cursor c){
+        ArrayList<Texte> textes = new ArrayList<>();
+        Texte t;
+        while(c.moveToNext()){
+            t = new Texte(
+                    c.getInt(TEXTE_COL_ID),
+                    new Date(c.getInt(TEXTE_COL_DATE)),
+                    c.getString(TEXTE_COL_CONTENU),
+                    this.getUtilisateurWithID(c.getInt(TEXTE_COL_UTILISATEUR)),
+                    this.getHistoireWithID(c.getInt(TEXTE_COL_HISTOIRE)));
+
+            textes.add(t);
+        }
+        return textes;
+    }
+
     //Cette méthode permet de convertir un cursor en un utilisateur
     private Texte cursorToTexte(Cursor c) {
         //si aucun élément n'a été retourné dans la requête, on renvoie null
@@ -293,19 +323,21 @@ public class CadavreExquisBDD {
 
     public boolean hasUtilisateur(Texte texte){
 
-        boolean hasUtilisateur;
+        boolean hasUtilisateur= false;
 
-        hasUtilisateur = this.getUtilisateurWithID(texte.getUtilisateur().getId()) != null;
+        if(texte.getUtilisateur()!=null && texte.getUtilisateur().getId() != null) {
+            hasUtilisateur = this.getUtilisateurWithID(texte.getUtilisateur().getId()) != null;
+        }
 
         return hasUtilisateur;
     }
 
     public boolean hasHistoire(Texte texte){
 
-        boolean hasHistoire;
-
-        hasHistoire = this.getHistoireWithID(texte.getHistoire().getId()) != null;
-
+        boolean hasHistoire = false;
+        if(texte.getHistoire()!=null && texte.getHistoire().getId() != null) {
+            hasHistoire = this.getHistoireWithID(texte.getHistoire().getId()) != null;
+        }
         return hasHistoire;
     }
 
