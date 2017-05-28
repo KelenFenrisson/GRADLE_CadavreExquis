@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginScreen">
+        </activity>
+        <activity android:name=".MainMenu">
+        </activity>
+        <activity android:name=".NouvellePhrase">
+        </activity>
+        <activity android:name=".Inscription">
+        </activity>
     </application>
 
 </manifest>

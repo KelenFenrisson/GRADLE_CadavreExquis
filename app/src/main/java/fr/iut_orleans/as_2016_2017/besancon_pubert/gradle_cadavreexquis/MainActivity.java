@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult (int requestcode, int resultcode, Intent intent ){
+        super.onActivityResult(requestcode, resultcode, intent);
+
         Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - requestcode :\n"+requestcode);
         Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - resultcode :\n"+resultcode);
         Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - intent :\n"+ intent);
