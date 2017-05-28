@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainMenu extends Activity
 {
@@ -14,9 +15,9 @@ public class MainMenu extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_mainmenu);
         Intent intent = getIntent ();
-        String message = "Bonjour, "+intent.getStringExtra("text");
-        //TextView texte = (TextView)findViewById(R.id.textView);
-        //texte.setText(message);
+        String message = "Bonjour, "+intent.getStringExtra("nomUser");
+        TextView texte = (TextView)findViewById(R.id.textView);
+        texte.setText(message);
     }
 
     public void jouer(View view){
@@ -26,6 +27,7 @@ public class MainMenu extends Activity
 
     public void seDeconnecter(View view){
         Intent intent = new Intent ();
+        intent.putExtra("deco", "Déconnexion");
         setResult(Activity.RESULT_OK , intent );
         super.finish ();
     }
