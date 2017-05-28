@@ -1,5 +1,6 @@
 package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,6 +101,11 @@ public class HistoireTest {
         assertEquals("Histoire.setTitre() 1 : ", "Histoire ", histoire1.getTitre());
         assertNotEquals("Histoire.setTitre() 2 : ", histoire1.getTitre(), histoire2.getTitre());
         assertNotEquals("Histoire.setTitre() 3 : ", "Histoire ", histoire3.getTitre());
+    }
+
+    @After
+    public void tearDown(){
+        //TODO
     }
 
 }
