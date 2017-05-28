@@ -80,14 +80,12 @@ public class CadavreExquisBDDTest {
         histoire = new Histoire(1, date);
         autrehistoire = new Histoire(2, autredate);
         texte = new Texte(1, date, contenu, utilisateur, histoire);
-        autretexte = new Texte(1, autredate, autrecontenu, autreutilisateur, autrehistoire);
+        autretexte = new Texte(2, autredate, autrecontenu, autreutilisateur, autrehistoire);
         evaluation = new Evaluation(utilisateur, texte, date, note, commentaire);
         autreevaluation = new Evaluation(autreutilisateur, autretexte, autredate, autrenote, autrecommentaire);
 
         cadavreExquisBDD = new CadavreExquisBDD(this.appContext);
         cadavreExquisBDD.open();
-
-
     }
 
     @Test
@@ -96,8 +94,8 @@ public class CadavreExquisBDDTest {
         cadavreExquisBDD.insertUtilisateur(utilisateur);
         cadavreExquisBDD.insertUtilisateur(autreutilisateur);
 
-        assertEquals("TEST cadavreExquisBDD.getUtilisateurWithID", utilisateur, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
-        assertEquals("TEST cadavreExquisBDD.getUtilisateurWithID", autreutilisateur, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.getUtilisateurWithID 1", utilisateur, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.getUtilisateurWithID 2", autreutilisateur, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
 
         Utilisateur mod1 = cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId());
         Utilisateur mod2 = cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId());
@@ -106,14 +104,14 @@ public class CadavreExquisBDDTest {
         cadavreExquisBDD.updateUtilisateur(1, mod1);
         cadavreExquisBDD.updateUtilisateur(2, mod2);
 
-        assertEquals("TEST cadavreExquisBDD.updateUtilisateur", mod1, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
-        assertEquals("TEST cadavreExquisBDD.updateUtilisateur", mod2, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateUtilisateur 1", mod1, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateUtilisateur 2", mod2, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
 
         cadavreExquisBDD.removeUtilisateurWithID(1);
         cadavreExquisBDD.removeUtilisateurWithID(2);
 
-        assertEquals("TEST cadavreExquisBDD.removeUtilisateur", null, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
-        assertEquals("TEST cadavreExquisBDD.removeUtilisateur", null, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeUtilisateur 1", null, cadavreExquisBDD.getUtilisateurWithID(utilisateur.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeUtilisateur 2", null, cadavreExquisBDD.getUtilisateurWithID(autreutilisateur.getId()));
     }
 
 
@@ -122,8 +120,8 @@ public class CadavreExquisBDDTest {
 
         cadavreExquisBDD.insertHistoire(histoire);
         cadavreExquisBDD.insertHistoire(autrehistoire);
-        assertEquals("TEST cadavreExquisBDD.getHistoireWithID", histoire, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
-        assertEquals("TEST cadavreExquisBDD.getHistoireWithID", autrehistoire, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.getHistoireWithID 1", histoire, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.getHistoireWithID 2", autrehistoire, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
 
         Histoire mod1 = cadavreExquisBDD.getHistoireWithID(histoire.getId());
         Histoire mod2 = cadavreExquisBDD.getHistoireWithID(autrehistoire.getId());
@@ -131,24 +129,27 @@ public class CadavreExquisBDDTest {
         mod2.setDateCreation(date);
         cadavreExquisBDD.updateHistoire(1, mod1);
         cadavreExquisBDD.updateHistoire(2, mod2);
-        assertEquals("TEST cadavreExquisBDD.updateHistoire", mod1, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
-        assertEquals("TEST cadavreExquisBDD.updateHistoire", mod2, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateHistoire 1", mod1, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateHistoire 2", mod2, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
 
         cadavreExquisBDD.removeHistoireWithID(1);
         cadavreExquisBDD.removeHistoireWithID(2);
 
-        assertEquals("TEST cadavreExquisBDD.removeHistoire", null, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
-        assertEquals("TEST cadavreExquisBDD.removeHistoire", null, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeHistoire 1", null, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeHistoire 2", null, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
     }
 
 
     @Test
     public void TexteTest() throws Exception {
-
+        cadavreExquisBDD.insertUtilisateur(utilisateur);
+        cadavreExquisBDD.insertUtilisateur(autreutilisateur);
+        cadavreExquisBDD.insertHistoire(histoire);
+        cadavreExquisBDD.insertHistoire(autrehistoire);
         cadavreExquisBDD.insertTexte(texte);
         cadavreExquisBDD.insertTexte(autretexte);
-        assertEquals("TEST cadavreExquisBDD.getTexteWithID", texte, cadavreExquisBDD.getTexteWithID(texte.getId()));
-        assertEquals("TEST cadavreExquisBDD.getTexteWithID", autretexte, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
+        assertEquals("TEST cadavreExquisBDD.getTexteWithID 1", texte, cadavreExquisBDD.getTexteWithID(texte.getId()));
+        assertEquals("TEST cadavreExquisBDD.getTexteWithID 2", autretexte, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
 
         Texte mod1 = cadavreExquisBDD.getTexteWithID(texte.getId());
         Texte mod2 = cadavreExquisBDD.getTexteWithID(autretexte.getId());
@@ -156,23 +157,28 @@ public class CadavreExquisBDDTest {
         mod1.setContenu(contenu);
         cadavreExquisBDD.updateTexte(1, mod1);
         cadavreExquisBDD.updateTexte(2, mod2);
-        assertEquals("TEST cadavreExquisBDD.updateTexte", mod1, cadavreExquisBDD.getTexteWithID(texte.getId()));
-        assertEquals("TEST cadavreExquisBDD.updateTexte", mod2, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateTexte 1", mod1, cadavreExquisBDD.getTexteWithID(texte.getId()));
+        assertEquals("TEST cadavreExquisBDD.updateTexte 2", mod2, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
 
         cadavreExquisBDD.removeTexteWithID(1);
         cadavreExquisBDD.removeTexteWithID(2);
 
-        assertEquals("TEST cadavreExquisBDD.removeTexte", null, cadavreExquisBDD.getTexteWithID(texte.getId()));
-        assertEquals("TEST cadavreExquisBDD.removeTexte", null, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeTexte 1", null, cadavreExquisBDD.getTexteWithID(texte.getId()));
+        assertEquals("TEST cadavreExquisBDD.removeTexte 2", null, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
     }
 
     @Test
     public void EvaluationTest() throws Exception {
-
+        cadavreExquisBDD.insertUtilisateur(utilisateur);
+        cadavreExquisBDD.insertUtilisateur(autreutilisateur);
+        cadavreExquisBDD.insertHistoire(histoire);
+        cadavreExquisBDD.insertHistoire(autrehistoire);
+        cadavreExquisBDD.insertTexte(texte);
+        cadavreExquisBDD.insertTexte(autretexte);
         cadavreExquisBDD.insertEvaluation(evaluation);
         cadavreExquisBDD.insertEvaluation(autreevaluation);
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
 
         Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId());
         Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId());
@@ -180,14 +186,14 @@ public class CadavreExquisBDDTest {
         mod1.setNote(note);
         cadavreExquisBDD.updateEvaluation(1,1, mod1);
         cadavreExquisBDD.updateEvaluation(2,2, mod2);
-        assertEquals("TEST cadavreExquisBDD.updateEvaluation", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.updateEvaluation", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.updateEvaluation 1", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.updateEvaluation 2", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
 
-        cadavreExquisBDD.removeTexteWithID(1);
-        cadavreExquisBDD.removeTexteWithID(2);
+        cadavreExquisBDD.removeEvaluationWithID(1,1);
+        cadavreExquisBDD.removeEvaluationWithID(2,2);
 
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 1", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 2", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
     }
 
     @After

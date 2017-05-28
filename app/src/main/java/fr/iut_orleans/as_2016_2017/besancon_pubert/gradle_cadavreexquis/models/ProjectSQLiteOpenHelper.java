@@ -86,6 +86,18 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
     }
 
     @Override
+    public void onOpen(SQLiteDatabase sqLiteDatabase) {
+        super.onOpen(sqLiteDatabase);
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase sqLiteDatabase) {
+        super.onConfigure(sqLiteDatabase);
+        sqLiteDatabase.setForeignKeyConstraintsEnabled(true);
+
+    }
+
+    @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE " +TABLE_EVALUER+";");
         sqLiteDatabase.execSQL("DROP TABLE " +TABLE_TEXTE+";");

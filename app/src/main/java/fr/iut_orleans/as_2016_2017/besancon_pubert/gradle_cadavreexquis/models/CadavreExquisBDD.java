@@ -276,7 +276,6 @@ public class CadavreExquisBDD {
 
         // On va choper l'utilisateur
         Utilisateur utilisateur = this.getUtilisateurWithID(c.getInt(TEXTE_COL_UTILISATEUR));
-
         texte.setUtilisateur(utilisateur);
         texte.setDate(new Date()); texte.getDate().setTime(c.getInt(TEXTE_COL_DATE));
         texte.setContenu(c.getString(TEXTE_COL_CONTENU));
