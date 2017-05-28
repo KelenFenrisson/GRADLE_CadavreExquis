@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
@@ -77,10 +78,10 @@ public class CadavreExquisBDDTest {
         autreutilisateur = new Utilisateur(2, autrelogin, autrepassword);
         histoire = new Histoire(1, date, "Cendrillon le retour");
         autrehistoire = new Histoire(2, autredate, "PanPan fait PAN!");
-        texte = new Texte(1, date, contenu, utilisateur, histoire);
-        autretexte = new Texte(2, autredate, autrecontenu, autreutilisateur, autrehistoire);
-        evaluation = new Evaluation(utilisateur, texte, date, note, commentaire);
-        autreevaluation = new Evaluation(autreutilisateur, autretexte, autredate, autrenote, autrecommentaire);
+        texte = new Texte(1, date, contenu, utilisateur.getId(), histoire.getId());
+        autretexte = new Texte(2, autredate, autrecontenu, autreutilisateur.getId(), autrehistoire.getId());
+        evaluation = new Evaluation(utilisateur.getId(), texte.getId(), date, note, commentaire);
+        autreevaluation = new Evaluation(autreutilisateur.getId(), autretexte.getId(), autredate, autrenote, autrecommentaire);
 
         cadavreExquisBDD = new CadavreExquisBDD(this.appContext);
         cadavreExquisBDD.open();
@@ -135,24 +136,6 @@ public class CadavreExquisBDDTest {
 
         assertEquals("TEST cadavreExquisBDD.removeHistoire 1", null, cadavreExquisBDD.getHistoireWithID(histoire.getId()));
         assertEquals("TEST cadavreExquisBDD.removeHistoire 2", null, cadavreExquisBDD.getHistoireWithID(autrehistoire.getId()));
-
-//        // Test de recuperation des textes associés a une histoire
-//        Utilisateur bob = new Utilisateur("Bob", "Bricolage");
-//        long bobid = cadavreExquisBDD.insertUtilisateur(bob);
-//        bob= cadavreExquisBDD.getUtilisateurWithID((int) bobid);
-//        Histoire relou = new Histoire(new Date(249999), "RELOU !");
-//        long relouid = cadavreExquisBDD.insertHistoire(relou);
-//        relou = cadavreExquisBDD.getHistoireWithID((int) relouid);
-//
-//        ArrayList<Texte> textes = new ArrayList<>();
-//        for(int i = 0; i<10; ++i){
-//            Texte t = new Texte(new Date(250000+i), "Phrase "+i, cadavreExquisBDD.getUtilisateurWithID(1), cadavreExquisBDD.getHistoireWithID(1));
-//            textes.add(t);
-//            textes.set(i,cadavreExquisBDD.getTexteWithID((int)cadavreExquisBDD.insertTexte(t)));
-//        }
-//
-//        Histoire relou2 = cadavreExquisBDD.getHistoireWithID(1);
-//        assertEquals("TEST cadavreExquisBDD.getTextesArrayListWithHistoireID", null, textes);
     }
 
 
@@ -193,23 +176,23 @@ public class CadavreExquisBDDTest {
         cadavreExquisBDD.insertTexte(autretexte);
         cadavreExquisBDD.insertEvaluation(evaluation);
         cadavreExquisBDD.insertEvaluation(autreevaluation);
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
 
-        Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId());
-        Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId());
+        Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id());
+        Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id());
         mod1.setNote(autrenote);
         mod1.setNote(note);
         cadavreExquisBDD.updateEvaluation(1,1, mod1);
         cadavreExquisBDD.updateEvaluation(2,2, mod2);
-        assertEquals("TEST cadavreExquisBDD.updateEvaluation 1", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.updateEvaluation 2", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+            assertEquals("TEST cadavreExquisBDD.updateEvaluation 1", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
+        assertEquals("TEST cadavreExquisBDD.updateEvaluation 2", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
 
         cadavreExquisBDD.removeEvaluationWithID(1,1);
         cadavreExquisBDD.removeEvaluationWithID(2,2);
 
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation 1", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur().getId(), evaluation.getTexte().getId()));
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation 2", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur().getId(), autreevaluation.getTexte().getId()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 1", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 2", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
     }
 
     @After

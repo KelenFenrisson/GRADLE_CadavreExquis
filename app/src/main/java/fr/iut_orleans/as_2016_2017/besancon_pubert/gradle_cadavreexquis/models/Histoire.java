@@ -74,21 +74,20 @@ public class Histoire
         this.textes = textes;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Histoire)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Histoire histoire = (Histoire) o;
         return Objects.equals(id, histoire.id) &&
+                Objects.equals(titre, histoire.titre) &&
                 Objects.equals(dateCreation, histoire.dateCreation) &&
                 Objects.equals(textes, histoire.textes);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(id, dateCreation, titre, textes);
+        return Objects.hash(id, titre, dateCreation, textes);
     }
 
     @Override

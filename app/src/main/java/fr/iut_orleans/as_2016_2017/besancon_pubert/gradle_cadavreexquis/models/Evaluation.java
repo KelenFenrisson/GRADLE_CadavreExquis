@@ -12,92 +12,85 @@ import java.util.Objects;
 
 public class Evaluation {
 
-    private Utilisateur utilisateur;
-    private Texte texte;
+    private Integer utilisateur_id;
+    private Integer texte_id;
     private Date dateEvaluation;
     private Integer note;
     private String commentaire;
 
     public Evaluation() {
-        this.utilisateur = null;
-        this.texte = null;
-        this.dateEvaluation = null;
-        this.note = null;
-        this.commentaire = null;
     }
 
-    public Evaluation(Utilisateur utilisateur, Texte texte, Date dateEvaluation, int note,  String commentaire) {
-        this.utilisateur = utilisateur;
-        this.texte = texte;
+    public Evaluation(Integer utilisateur_id, Integer texte_id, Date dateEvaluation, Integer note, String commentaire) {
+        this.utilisateur_id = utilisateur_id;
+        this.texte_id = texte_id;
         this.dateEvaluation = dateEvaluation;
         this.note = note;
         this.commentaire = commentaire;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public Integer getUtilisateur_id() {
+        return utilisateur_id;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
-
-    public Texte getTexte() {
-        return texte;
-    }
-
-    public void setTexte(Texte texte) {
-        this.texte = texte;
+    public Integer getTexte_id() {
+        return texte_id;
     }
 
     public Date getDateEvaluation() {
         return dateEvaluation;
     }
 
-    public void setDateEvaluation(Date dateEvaluation) {
-        this.dateEvaluation = dateEvaluation;
-    }
-
     public Integer getNote() {
         return note;
-    }
-
-    public void setNote(Integer note) {
-        this.note = note;
     }
 
     public String getCommentaire() {
         return commentaire;
     }
 
+    public void setUtilisateur_id(Integer utilisateur_id) {
+        this.utilisateur_id = utilisateur_id;
+    }
+
+    public void setTexte_id(Integer texte_id) {
+        this.texte_id = texte_id;
+    }
+
+    public void setDateEvaluation(Date dateEvaluation) {
+        this.dateEvaluation = dateEvaluation;
+    }
+
+    public void setNote(Integer note) {
+        this.note = note;
+    }
+
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Evaluation)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Evaluation that = (Evaluation) o;
-        return Objects.equals(utilisateur, that.utilisateur) &&
-                Objects.equals(texte, that.texte) &&
+        return Objects.equals(utilisateur_id, that.utilisateur_id) &&
+                Objects.equals(texte_id, that.texte_id) &&
                 Objects.equals(dateEvaluation, that.dateEvaluation) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(commentaire, that.commentaire);
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(utilisateur, texte, dateEvaluation, note, commentaire);
+        return Objects.hash(utilisateur_id, texte_id, dateEvaluation, note, commentaire);
     }
 
     @Override
     public String toString() {
         return "Evaluation{" +
-                "utilisateur=" + utilisateur +
-                ", texte=" + texte +
+                "utilisateur_id=" + utilisateur_id +
+                ", texte_id=" + texte_id +
                 ", dateEvaluation=" + dateEvaluation +
                 ", note=" + note +
                 ", commentaire='" + commentaire + '\'' +

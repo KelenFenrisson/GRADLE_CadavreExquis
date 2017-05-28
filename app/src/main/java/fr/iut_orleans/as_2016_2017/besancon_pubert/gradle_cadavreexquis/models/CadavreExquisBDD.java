@@ -209,7 +209,7 @@ public class CadavreExquisBDD {
         histoire.setDateCreation(new Date());
         histoire.getDateCreation().setTime(c.getInt(HISTOIRE_COL_DATE));
         histoire.setTitre(c.getString(HISTOIRE_COL_TITRE));
-        histoire.setTextes(this.getTextesArrayListWithHistoireID(HISTOIRE_COL_ID));
+        histoire.setTextes(this.getTextesArrayListWithHistoireID(histoire.getId()));
         //On ferme le cursor
         c.close();
         //On retourne l'utilisateur
@@ -231,15 +231,15 @@ public class CadavreExquisBDD {
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
 
-        if((texte.getUtilisateur() != null && this.hasUtilisateur(texte)) && (texte.getHistoire() != null && this.hasHistoire(texte)))
+        if((this.hasUtilisateur(texte)) && this.hasHistoire(texte))
         {
-            values.put(ID_UTILISATEUR, texte.getUtilisateur().getId());
+            values.put(ID_UTILISATEUR, texte.getUtilisateur_id());
 
             values.put(DATE_TEXTE, texte.getDate().getTime());
 
             values.put(CONTENU_TEXTE, texte.getContenu());
 
-            values.put(ID_HISTOIRE, texte.getHistoire().getId());
+            values.put(ID_HISTOIRE, texte.getHistoire_id());
         }
         //on insère l'objet dans la BDD via le ContentValues
         return this.sqliteDatabase.insert(TABLE_TEXTE, null, values);
@@ -249,10 +249,10 @@ public class CadavreExquisBDD {
         //La mise à jour d'un utilisateur dans la BDD fonctionne plus ou moins comme une insertion
         //il faut simple préciser quel utilisateur on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
-        values.put(ID_UTILISATEUR, texte.getUtilisateur().getId());
+        values.put(ID_UTILISATEUR, texte.getUtilisateur_id());
         values.put(DATE_TEXTE, texte.getDate().getTime());
         values.put(CONTENU_TEXTE, texte.getContenu());
-        values.put(ID_HISTOIRE, texte.getHistoire().getId());
+        values.put(ID_HISTOIRE, texte.getHistoire_id());
         return this.sqliteDatabase.update(TABLE_TEXTE, values, ID_TEXTE + " = " +id, null);
     }
 
@@ -281,8 +281,8 @@ public class CadavreExquisBDD {
                     c.getInt(TEXTE_COL_ID),
                     new Date(c.getInt(TEXTE_COL_DATE)),
                     c.getString(TEXTE_COL_CONTENU),
-                    this.getUtilisateurWithID(c.getInt(TEXTE_COL_UTILISATEUR)),
-                    this.getHistoireWithID(c.getInt(TEXTE_COL_HISTOIRE)));
+                    c.getInt(TEXTE_COL_UTILISATEUR),
+                    c.getInt(TEXTE_COL_HISTOIRE));
 
             textes.add(t);
         }
@@ -301,18 +301,10 @@ public class CadavreExquisBDD {
         Texte texte = new Texte();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         texte.setId(c.getInt(TEXTE_COL_ID));
-
-        // On va choper l'utilisateur
-        Utilisateur utilisateur = this.getUtilisateurWithID(c.getInt(TEXTE_COL_UTILISATEUR));
-        texte.setUtilisateur(utilisateur);
+        texte.setUtilisateur_id(c.getInt(TEXTE_COL_UTILISATEUR));
         texte.setDate(new Date()); texte.getDate().setTime(c.getInt(TEXTE_COL_DATE));
         texte.setContenu(c.getString(TEXTE_COL_CONTENU));
-
-        // On va choper l'Histoire
-        Histoire histoire = this.getHistoireWithID(c.getInt(TEXTE_COL_HISTOIRE));
-
-
-        texte.setHistoire(histoire);
+        texte.setHistoire_id(c.getInt(TEXTE_COL_HISTOIRE));
         //On ferme le cursor
         c.close();
         //On retourne l'utilisateur
@@ -323,8 +315,8 @@ public class CadavreExquisBDD {
 
         boolean hasUtilisateur= false;
 
-        if(texte.getUtilisateur()!=null && texte.getUtilisateur().getId() != null) {
-            hasUtilisateur = this.getUtilisateurWithID(texte.getUtilisateur().getId()) != null;
+        if(texte.getUtilisateur_id() != null) {
+            hasUtilisateur = this.getUtilisateurWithID(texte.getUtilisateur_id()) != null;
         }
 
         return hasUtilisateur;
@@ -333,8 +325,8 @@ public class CadavreExquisBDD {
     public boolean hasHistoire(Texte texte){
 
         boolean hasHistoire = false;
-        if(texte.getHistoire()!=null && texte.getHistoire().getId() != null) {
-            hasHistoire = this.getHistoireWithID(texte.getHistoire().getId()) != null;
+        if(texte.getHistoire_id() != null) {
+            hasHistoire = this.getHistoireWithID(texte.getHistoire_id()) != null;
         }
         return hasHistoire;
     }
@@ -352,8 +344,8 @@ public class CadavreExquisBDD {
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
-        values.put(ID_UTILISATEUR, evaluation.getUtilisateur().getId());
-        values.put(ID_TEXTE, evaluation.getTexte().getId());
+        values.put(ID_UTILISATEUR, evaluation.getUtilisateur_id());
+        values.put(ID_TEXTE, evaluation.getTexte_id());
         values.put(DATE_EVALUER, evaluation.getDateEvaluation().getTime());
         values.put(NOTE_EVALUER, evaluation.getNote());
         values.put(COMMENTAIRE_EVALUER, evaluation.getCommentaire());
@@ -365,8 +357,8 @@ public class CadavreExquisBDD {
         //La mise à jour d'un utilisateur dans la BDD fonctionne plus ou moins comme une insertion
         //il faut simple préciser quel utilisateur on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
-        values.put(ID_UTILISATEUR, evaluation.getUtilisateur().getId());
-        values.put(ID_TEXTE, evaluation.getTexte().getId());
+        values.put(ID_UTILISATEUR, evaluation.getUtilisateur_id());
+        values.put(ID_TEXTE, evaluation.getTexte_id());
         values.put(DATE_EVALUER, evaluation.getDateEvaluation().getTime());
         values.put(NOTE_EVALUER, evaluation.getNote());
         values.put(COMMENTAIRE_EVALUER, evaluation.getCommentaire());
@@ -395,17 +387,8 @@ public class CadavreExquisBDD {
         //On créé un utilisateur "vierge"
         Evaluation evaluation = new Evaluation();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
-        // On va choper l'utilisateur
-        Utilisateur utilisateur = this.getUtilisateurWithID(c.getInt(EVALUER_COL_UTILISATEUR));
-
-        evaluation.setUtilisateur(utilisateur);
-
-        // On va choper le texte
-
-        Texte texte = this.getTexteWithID(c.getInt(EVALUER_COL_TEXTE));
-
-        evaluation.setTexte(texte);
-
+        evaluation.setUtilisateur_id(c.getInt(EVALUER_COL_UTILISATEUR));
+        evaluation.setTexte_id(c.getInt(EVALUER_COL_TEXTE));
         evaluation.setDateEvaluation(new Date()); evaluation.getDateEvaluation().setTime(c.getInt(EVALUER_COL_DATE));
         evaluation.setNote(c.getInt(EVALUER_COL_NOTE));
         evaluation.setCommentaire(c.getString(EVALUER_COL_COMMENTAIRE));
