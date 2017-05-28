@@ -4,38 +4,48 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.UtilisateurBDD;
 
 public class MainActivity extends AppCompatActivity {
 
-    Utilisateur utilisateur;
+    public static final int LOGIN_REQUEST = 100;
+
+    private String utilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Si un utilisateur est connecté :
-        if(savedInstanceState.get("Utilisateur")!=null)
-        {
+        Log.i(getResources().getString(R.string.app_name), "MainActivity.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
-        }
-        // Sinon on envoie Anonyme se connecter
-        else{
-            utilisateur = this.getUtilisateur();
+        // S'il n'y a pas de sauvegarde, il n'y a pas d'utilisateur.
+        if(savedInstanceState == null)
+        {
+            Intent connexionIntent = new Intent(this, LoginScreen.class);
+            Log.i(getResources().getString(R.string.app_name), "MainActivity.onCreate(Bundle savedInstanceState) - intent :\n"+connexionIntent);
+
+            startActivityForResult(new Intent(this, LoginScreen.class), LOGIN_REQUEST);
         }
     }
 
-    public Utilisateur getUtilisateur(){
+    @Override
+    public void onActivityResult (int requestcode, int resultcode, Intent intent ){
+        Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - requestcode :\n"+requestcode);
+        Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - resultcode :\n"+resultcode);
+        Log.i(getResources().getString(R.string.app_name), "MainActivity.onActivityResult(int requestcode, int resultcode, Intent intent ) - intent :\n"+ intent);
 
-        Utilisateur utilisateur = null;
-        Intent intent = new Intent("Connexion Utilisateur", Uri.parse("Utilisateur : " + utilisateur), this , LoginScreen.class);
-
-        if(intent.resolveActivity(getPackageManager())!=null){
-            startActivity(intent);
+        switch(requestcode){
+            case LOGIN_REQUEST :
+                switch(resultcode){
+                    case (RESULT_OK) : this.utilisateur = intent.getStringExtra("utilisateur");
+//                    case (RESULT_CANCELED) : ;
+//                    case (RESULT_FIRST_USER): ;
+                }
         }
-
-        return utilisateur;
     }
 }
