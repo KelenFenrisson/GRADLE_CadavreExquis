@@ -27,6 +27,7 @@ public class MainMenu extends Activity
 
     public void seDeconnecter(View view){
         Intent intent = new Intent ();
+        intent.putExtra("deco", "Déconnexion");
         setResult(Activity.RESULT_OK , intent );
         super.finish ();
     }

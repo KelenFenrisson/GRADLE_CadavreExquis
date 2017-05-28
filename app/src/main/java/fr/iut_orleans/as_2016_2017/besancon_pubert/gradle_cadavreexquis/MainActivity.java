@@ -18,15 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Log.i(getResources().getString(R.string.app_name), "MainActivity.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
-//         S'il n'y a pas de sauvegarde, il n'y a pas d'utilisateur.
-//        if(savedInstanceState == null)
-//        {
-//            Intent connexionIntent = new Intent(this, LoginScreen.class);
-//            Log.i(getResources().getString(R.string.app_name), "MainActivity.onCreate(Bundle savedInstanceState) - intent :\n"+connexionIntent);
-//
-//            startActivityForResult(new Intent(this, LoginScreen.class), LOGIN_REQUEST);
-//        }
-
     }
 
     @Override

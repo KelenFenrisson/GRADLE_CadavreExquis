@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
@@ -19,7 +20,8 @@ public class LoginScreen extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_loginscreen);
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
-//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation de l'intent :\n"+ getIntent());
+
+
     }
 
 
@@ -32,9 +34,7 @@ public class LoginScreen extends Activity
         String password = ((EditText)findViewById(R.id.txtinput_password)).getText().toString();
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Password :\n"+password);
 
-//checkCredentials(login, password)
-        if(true){
-//            this.setResult(RESULT_OK);
+        if(checkCredentials(login, password)){
             Intent intent = new Intent (this,MainMenu.class);
             EditText nameuser = (EditText)findViewById(R.id.txtinput_login);
             String message = nameuser.getText().toString();
@@ -44,7 +44,8 @@ public class LoginScreen extends Activity
         }
         else{
 //            Log.i("test", "LoginScreen.onLogInClick(View view) - la verif retourne faux :\n");
-            //TODO
+            Toast toast = Toast.makeText(this, "Votre login ou votre mot de passe n'est pas correct", Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 
@@ -64,6 +65,18 @@ public class LoginScreen extends Activity
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.inscription(View view) - appui sur le bouton :\n");
         Intent intent = new Intent(this,Inscription.class);
         startActivityForResult(intent,2);
+    }
+
+    @Override
+    public void onActivityResult (int requestcode, int resultcode, Intent intent ) {
+        if(requestcode==2) {
+            super.onActivityResult(requestcode, resultcode, intent);
+            String message = intent.getStringExtra("deco");
+            Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+            toast.show();
+            ((EditText) findViewById(R.id.txtinput_login)).setText("");
+            ((EditText) findViewById(R.id.txtinput_password)).setText("");
+        }
     }
 
 }

@@ -31,13 +31,15 @@ public class Inscription extends Activity
 
         if(!password.getText().toString().equals(passwordConfirm.getText().toString()))
         {
-            Toast toast = Toast.makeText(this, "Pas le mot de passe identique", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "le mot de passe est mal confirmé", Toast.LENGTH_LONG);
             toast.show();
         }
-        else if (cadavreExquisBDD.getUtilisateurWithLogin(textLogin).equals(textLogin));
+        else if (cadavreExquisBDD.inBDDUtilisateurWithLogin(textLogin)){
+            Toast toast = Toast.makeText(this, "Ce nom existe déjà", Toast.LENGTH_LONG);
+            toast.show();
+        }
         else
         {
-            //inscription a faire dans la base de données
             Utilisateur utilisateur = new Utilisateur(textLogin,textPassword);
             cadavreExquisBDD.insertUtilisateur(utilisateur);
             cadavreExquisBDD.close();
