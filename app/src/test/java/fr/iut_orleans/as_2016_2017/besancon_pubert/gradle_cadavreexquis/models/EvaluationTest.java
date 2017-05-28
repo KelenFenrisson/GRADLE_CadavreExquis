@@ -2,8 +2,6 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by mathieu on 28/05/17.
  */

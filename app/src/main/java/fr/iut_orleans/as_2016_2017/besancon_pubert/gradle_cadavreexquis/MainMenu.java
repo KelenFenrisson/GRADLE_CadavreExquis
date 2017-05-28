@@ -3,10 +3,7 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainMenu extends Activity
 {
