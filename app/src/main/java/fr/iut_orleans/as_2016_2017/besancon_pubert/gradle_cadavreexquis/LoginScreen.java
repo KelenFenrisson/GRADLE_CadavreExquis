@@ -1,6 +1,7 @@
 package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,34 +18,39 @@ public class LoginScreen extends Activity
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_loginscreen);
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation de l'intent :\n"+ getIntent());
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation de l'intent :\n"+ getIntent());
     }
 
 
     public void onLogInClick(View view){
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - appui sur le bouton :\n");
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - appui sur le bouton :\n");
 
         String login = ((EditText)findViewById(R.id.txtinput_login)).getText().toString();
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Login :\n"+login);
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Login :\n"+login);
 
         String password = ((EditText)findViewById(R.id.txtinput_password)).getText().toString();
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Password :\n"+password);
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Password :\n"+password);
 
-
-        if(checkCredentials(login, password)){
-            this.setResult(RESULT_OK);
-            //TODO
+//checkCredentials(login, password)
+        if(true){
+//            this.setResult(RESULT_OK);
+            Intent intent = new Intent (this,MainMenu.class);
+            EditText nameuser = (EditText)findViewById(R.id.txtinput_login);
+            String message = nameuser.getText().toString();
+            intent.putExtra("nomUser", message);
+            setResult(Activity.RESULT_OK , intent );
+            startActivityForResult(intent,2);
         }
         else{
-            Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - la verif retourne faux :\n");
+//            Log.i("test", "LoginScreen.onLogInClick(View view) - la verif retourne faux :\n");
             //TODO
         }
     }
 
     public boolean checkCredentials(String login, String password){
         //TODO : un vrai contrôle de mot de passe et tout et tout
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.checkCredentials(String login, String password) - verif :\n");
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.checkCredentials(String login, String password) - verif :\n");
 
         CadavreExquisBDD cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
@@ -54,9 +60,10 @@ public class LoginScreen extends Activity
         return utilisateur != null && utilisateur.getMotDePasse().equals(password);
     }
 
-    public void onCancelClick(View view){
-        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCancelClick(View view) - appui sur le bouton :\n");
-        //TODO
+    public void inscription(View view){
+//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.inscription(View view) - appui sur le bouton :\n");
+        Intent intent = new Intent(this,Inscription.class);
+        startActivityForResult(intent,2);
     }
 
 }
