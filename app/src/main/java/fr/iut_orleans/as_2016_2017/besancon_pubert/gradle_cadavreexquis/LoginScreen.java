@@ -1,15 +1,13 @@
 package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
-import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.UtilisateurBDD;
 
 public class LoginScreen extends Activity
 {
@@ -48,10 +46,10 @@ public class LoginScreen extends Activity
         //TODO : un vrai contrôle de mot de passe et tout et tout
         Log.i(getResources().getString(R.string.app_name), "LoginScreen.checkCredentials(String login, String password) - verif :\n");
 
-        UtilisateurBDD utilisateurBDD = new UtilisateurBDD(this);
-        utilisateurBDD.open();
-        Utilisateur utilisateur = utilisateurBDD.getUtilisateurWithLogin(login);
-        utilisateurBDD.close();
+        CadavreExquisBDD cadavreExquisBDD = new CadavreExquisBDD(this);
+        cadavreExquisBDD.open();
+        Utilisateur utilisateur = cadavreExquisBDD.getUtilisateurWithLogin(login);
+        cadavreExquisBDD.close();
 
         return utilisateur != null && utilisateur.getMotDePasse().equals(password);
     }
