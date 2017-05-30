@@ -9,20 +9,28 @@ import android.widget.TextView;
 public class MainMenu extends Activity
 {
     /** Called when the activity is first created. */
+    String nameUser;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_mainmenu);
         Intent intent = getIntent ();
-        String message = "Bonjour, "+intent.getStringExtra("nomUser");
+        nameUser = intent.getStringExtra("nomUser");
+        String message = "Bonjour, "+nameUser;
         TextView texte = (TextView)findViewById(R.id.textView);
         texte.setText(message);
     }
 
     public void jouer(View view){
         Intent intent = new Intent(this,NouvellePhrase.class);
+//        intent.putExtra()
         startActivityForResult(intent,3);
+    }
+
+    public void historique(View view){
+        Intent intent = new Intent(this,HistoriquePhrase.class);
+        startActivityForResult(intent,4);
     }
 
     public void seDeconnecter(View view){

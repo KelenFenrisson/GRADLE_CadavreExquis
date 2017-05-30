@@ -21,9 +21,7 @@ public class LoginScreen extends Activity
         this.setContentView(R.layout.activity_loginscreen);
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
-
     }
-
 
     public void onLogInClick(View view){
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - appui sur le bouton :\n");
@@ -64,7 +62,7 @@ public class LoginScreen extends Activity
     public void inscription(View view){
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.inscription(View view) - appui sur le bouton :\n");
         Intent intent = new Intent(this,Inscription.class);
-        startActivityForResult(intent,2);
+        startActivityForResult(intent,1);
     }
 
     @Override

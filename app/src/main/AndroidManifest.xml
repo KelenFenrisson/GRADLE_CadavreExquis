@@ -17,14 +17,31 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".MainActivity">
+        <activity   android:name=".MainActivity"
+                    android:label="MainActivity"
+                    android:parentActivityName="LoginScreen">
         </activity>
-        <activity android:name=".MainMenu">
+
+        <activity   android:name=".MainMenu"
+                    android:label="MainMenu"
+                    android:parentActivityName="LoginScreen"  >
         </activity>
-        <activity android:name=".NouvellePhrase">
+
+        <activity   android:name=".NouvellePhrase"
+                    android:label="NouvellePhrase"
+                    android:parentActivityName="MainMenu">
         </activity>
-        <activity android:name=".Inscription">
+
+        <activity   android:name=".Inscription"
+                    android:label="Inscription"
+                    android:parentActivityName="LoginScreen">
         </activity>
+
+        <activity   android:name=".HistoriquePhrase"
+                    android:label="HistoriquePhrase"
+                    android:parentActivityName="MainMenu">
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ public class Inscription extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_inscription);
     }
+
 
     public void validerInscription(View view){
         EditText login = (EditText)findViewById(R.id.editLogin);
@@ -46,4 +48,14 @@ public class Inscription extends Activity
             super.finish ();
         }
     }
+
+    // dans le cas ou l'on appuie sur la fleche de retour
+    @Override
+    public void finish ()
+    {
+        Intent intent = new Intent ();
+        setResult(Activity.RESULT_OK , intent );
+        super.finish ();
+    }
+
 }
