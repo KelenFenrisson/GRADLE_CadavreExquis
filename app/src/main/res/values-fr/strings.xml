@@ -13,4 +13,7 @@
     <string name="app_validate">Confirmer</string>
     <string name="app_yes">Oui</string>
     <string name="app_welcome">Bienvenue !</string>
+    <string name="app_newsentencescreen_title">Nouvelle Phrase</string>
+    <string name="app_newstory">Nouvelle Histoire</string>
+    <string name="app_previously">Précédement</string>
 </resources>

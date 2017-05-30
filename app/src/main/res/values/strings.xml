@@ -12,5 +12,8 @@
     <string name="app_cancel">Cancel</string>
     <string name="app_yes">Yes</string>
     <string name="app_no">No</string>
+    <string name="app_newsentencescreen_title">New Sentence</string>
+    <string name="app_previously">Previously</string>
+    <string name="app_newstory">New Story</string>
 
 </resources>
