@@ -198,9 +198,55 @@ public class CadavreExquisBDD {
     public Histoire getHistoireWithID(int id) {
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son login)
         Cursor c = this.sqliteDatabase.query(TABLE_HISTOIRE, new String[]{ID_HISTOIRE, DATE_HISTOIRE, TITRE_HISTOIRE}, ID_HISTOIRE + " = \"" + id + "\"", null, null, null, null);
-        return this.cursorToHistoire(c);
+        return cursorToHistoire(c);
     }
 
+    public ArrayList<Histoire> getAllHistoire(){
+        // Recupere toutes les histoires et les renvoie sous forme d'ArrayList
+        Cursor c = this.sqliteDatabase.query(TABLE_HISTOIRE, new String[]{ID_HISTOIRE, DATE_HISTOIRE, TITRE_HISTOIRE}, null, null, null, null, null);
+        return cursorToListeHistoire(c);
+    }
+
+    public ArrayList<Histoire> getAllHistoireFromUtilisateurID(int id){
+        // Recupere toutes les histoires d'un utilisateur et les renvoie sous forme d'ArrayList
+        Cursor c = this.sqliteDatabase.rawQuery(
+                "SELECT "+ID_HISTOIRE+","+DATE_HISTOIRE+","+TITRE_HISTOIRE+" "+
+                "FROM "+TABLE_HISTOIRE+" NATURAL JOIN "+TABLE_TEXTE+" "+
+                "WHERE "+ID_UTILISATEUR+"="+id+";",
+                null
+        );
+
+        return cursorToListeHistoire(c);
+    }
+
+    public ArrayList<Histoire> getAllHistoireFromUtilisateurLogin(String login){
+        // Recupere toutes les histoires d'un utilisateur et les renvoie sous forme d'ArrayList
+        Cursor c = this.sqliteDatabase.rawQuery(
+                "SELECT "+ID_HISTOIRE+","+DATE_HISTOIRE+","+TITRE_HISTOIRE+" "+
+                        "FROM "+TABLE_HISTOIRE+" NATURAL JOIN "+TABLE_TEXTE+" NATURAL JOIN "+TABLE_UTILISATEUR+" "+
+                        "WHERE "+LOGIN_UTILISATEUR+" LIKE '"+login+"';",
+                null
+        );
+
+        return cursorToListeHistoire(c);
+    }
+
+    private ArrayList<Histoire> cursorToListeHistoire(Cursor c){
+        // Recupere toutes les histoires d'un curseur d'ArrayList
+
+        ArrayList<Histoire> histoires = new ArrayList<>();
+        Histoire h;
+        while (c.moveToNext()) {
+            h = new Histoire(
+                    c.getInt(HISTOIRE_COL_ID),
+                    new Date(c.getInt(HISTOIRE_COL_DATE)),
+                    c.getString(HISTOIRE_COL_TITRE)
+            );
+
+            histoires.add(h);
+        }
+        return histoires;
+    }
     //Cette méthode permet de convertir un cursor en un histoire
     private Histoire cursorToHistoire(Cursor c) {
         //si aucun élément n'a été retourné dans la requête, on renvoie null
