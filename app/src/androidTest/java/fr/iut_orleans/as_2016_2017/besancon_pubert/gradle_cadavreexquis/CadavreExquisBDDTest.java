@@ -159,8 +159,6 @@ public class CadavreExquisBDDTest {
         assertEquals("TEST cadavreExquisBDD.updateTexte 1", mod1, cadavreExquisBDD.getTexteWithID(texte.getId()));
         assertEquals("TEST cadavreExquisBDD.updateTexte 2", mod2, cadavreExquisBDD.getTexteWithID(autretexte.getId()));
 
-        assertEquals("Recup toutes histoires d'un user", null, cadavreExquisBDD.getAllHistoireFromUtilisateurLogin(utilisateur.getLogin()));
-
         cadavreExquisBDD.removeTexteWithID(1);
         cadavreExquisBDD.removeTexteWithID(2);
 
