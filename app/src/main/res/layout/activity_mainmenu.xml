@@ -19,7 +19,8 @@
         android:text="Afficher les phrases"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"/>
+        android:id="@+id/historique"
+        android:onClick="historique"/>
     <Button
         android:text="Se déconnecter"
         android:layout_width="match_parent"
