@@ -42,6 +42,12 @@
                     android:parentActivityName="MainMenu">
         </activity>
 
+        <activity   android:name=".Evaluation"
+                    android:label="Evaluation"
+                    android:parentActivityName="HistoriquePhrase">
+        </activity>
+
+
     </application>
 
 </manifest>

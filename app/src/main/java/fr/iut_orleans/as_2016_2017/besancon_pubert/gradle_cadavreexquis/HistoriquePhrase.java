@@ -1,8 +1,8 @@
 package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +18,7 @@ public class HistoriquePhrase extends Activity {
 
     ArrayList<String> listeElem;
     ArrayAdapter<String> adapter;
+    Intent intent;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -28,16 +29,17 @@ public class HistoriquePhrase extends Activity {
         listeElem.add("Pommes");
         listeElem.add("Poires");
         listeElem.add("Cerises");
-        adapter = new ArrayAdapter<String>(this, R.layout.historique, listeElem);
+        adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, listeElem);
         ListView listeV1 = (ListView) findViewById(R.id.listeViewHistorique);
         listeV1.setAdapter(adapter);
+        intent = new Intent(this,Evaluation.class);
 
-//        listeV1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Log.i("test",""+i);
-//            }
-//        });
+        listeV1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivityForResult(intent,1);
+            }
+        });
 
     }
 
