@@ -24,12 +24,13 @@ public class MainMenu extends Activity
 
     public void jouer(View view){
         Intent intent = new Intent(this,NouvellePhrase.class);
-//        intent.putExtra()
+        //ajouter envoie du nom user en +
         startActivityForResult(intent,3);
     }
 
     public void historique(View view){
         Intent intent = new Intent(this,HistoriquePhrase.class);
+        //ajouter envoie du nom user en +
         startActivityForResult(intent,4);
     }
 

@@ -10,6 +10,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Histoire;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
+
 /**
  * Created by besancon on 30/05/17.
  */
@@ -18,6 +22,9 @@ public class HistoriquePhrase extends Activity {
 
     ArrayList<String> listeElem;
     ArrayAdapter<String> adapter;
+    ArrayList<Histoire> listeHistoire;
+    CadavreExquisBDD cadavreExquisBDD;
+
     Intent intent;
 
     @Override
@@ -25,10 +32,21 @@ public class HistoriquePhrase extends Activity {
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.historique);
+
         listeElem = new ArrayList<String>();
+
+        cadavreExquisBDD = new CadavreExquisBDD(this);
+        cadavreExquisBDD.open();
+        listeHistoire = cadavreExquisBDD.getAllHistoire();
+        for(Histoire titre : listeHistoire)
+            listeElem.add(titre.getTitre());
+        cadavreExquisBDD.close();
+
         listeElem.add("Pommes");
         listeElem.add("Poires");
         listeElem.add("Cerises");
+
+
         adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, listeElem);
         ListView listeV1 = (ListView) findViewById(R.id.listeViewHistorique);
         listeV1.setAdapter(adapter);
@@ -37,6 +55,8 @@ public class HistoriquePhrase extends Activity {
         listeV1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Histoire histoire = listeHistoire.get(i);
+                intent.putExtra("id",histoire.getId());
                 startActivityForResult(intent,1);
             }
         });

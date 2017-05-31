@@ -19,5 +19,9 @@ public class Evaluation extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.evaluation);
+        Intent intent = getIntent ();
+        int idHistoire = Integer.parseInt(intent.getStringExtra("id"));
+
     }
+
 }
