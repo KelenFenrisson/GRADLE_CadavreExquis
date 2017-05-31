@@ -16,11 +16,19 @@
         android:id="@+id/button2"
         android:onClick="jouer"/>
     <Button
-        android:text="Afficher les phrases"
+        android:text="Afficher toutes les histoires"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/historique"
-        android:onClick="historique"/>
+        android:id="@+id/buttonAll"
+        android:onClick="historiqueAll"/>
+
+    <Button
+        android:id="@+id/buttonOnlyUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="historiqueUserOnly"
+        android:text="Afficher mes histoires" />
+
     <Button
         android:text="Se déconnecter"
         android:layout_width="match_parent"

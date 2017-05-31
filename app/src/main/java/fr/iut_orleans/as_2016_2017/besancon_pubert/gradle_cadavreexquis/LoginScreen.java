@@ -13,6 +13,9 @@ import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.U
 
 public class LoginScreen extends Activity
 {
+
+    int idUser;
+    CadavreExquisBDD cadavreExquisBDD;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -30,30 +33,27 @@ public class LoginScreen extends Activity
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Login :\n"+login);
 
         String password = ((EditText)findViewById(R.id.txtinput_password)).getText().toString();
-//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onLogInClick(View view) - texte dans le champ Password :\n"+password);
+//        Log.i("test", "LoginScreen test connexion");
 
         if(checkCredentials(login, password)){
             Intent intent = new Intent (this,MainMenu.class);
-            EditText nameuser = (EditText)findViewById(R.id.txtinput_login);
-            String message = nameuser.getText().toString();
-            intent.putExtra("nomUser", message);
+            intent.putExtra("idUser", Integer.toString(idUser));
             setResult(Activity.RESULT_OK , intent );
             startActivityForResult(intent,2);
         }
         else{
-//            Log.i("test", "LoginScreen.onLogInClick(View view) - la verif retourne faux :\n");
             Toast toast = Toast.makeText(this, "Votre login ou votre mot de passe n'est pas correct", Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
     public boolean checkCredentials(String login, String password){
-        //TODO : un vrai contrôle de mot de passe et tout et tout
-//        Log.i(getResources().getString(R.string.app_name), "LoginScreen.checkCredentials(String login, String password) - verif :\n");
 
-        CadavreExquisBDD cadavreExquisBDD = new CadavreExquisBDD(this);
+        cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
         Utilisateur utilisateur = cadavreExquisBDD.getUtilisateurWithLogin(login);
+        if (utilisateur!=null)
+            idUser = utilisateur.getId();
         cadavreExquisBDD.close();
 
         return utilisateur != null && utilisateur.getMotDePasse().equals(password);

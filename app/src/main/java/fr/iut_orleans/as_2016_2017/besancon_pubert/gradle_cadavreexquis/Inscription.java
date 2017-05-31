@@ -19,8 +19,7 @@ public class Inscription extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_inscription);
     }
-
-
+    
     public void validerInscription(View view){
         EditText login = (EditText)findViewById(R.id.editLogin);
         EditText password = (EditText)findViewById(R.id.editPassword);

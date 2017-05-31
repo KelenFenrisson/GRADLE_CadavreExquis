@@ -3,35 +3,54 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
 
 public class MainMenu extends Activity
 {
     /** Called when the activity is first created. */
-    String nameUser;
+    int idUser;
+    Utilisateur user;
+    CadavreExquisBDD cadavreExquisBDD;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_mainmenu);
         Intent intent = getIntent ();
-        nameUser = intent.getStringExtra("nomUser");
-        String message = "Bonjour, "+nameUser;
+        idUser = Integer.parseInt(intent.getStringExtra("idUser"));
+        cadavreExquisBDD = new CadavreExquisBDD(this);
+        cadavreExquisBDD.open();
+        user = cadavreExquisBDD.getUtilisateurWithID(idUser);
+        String message = "Bonjour, "+user.getLogin();
         TextView texte = (TextView)findViewById(R.id.textView);
         texte.setText(message);
     }
 
     public void jouer(View view){
         Intent intent = new Intent(this,NouvellePhrase.class);
-        //ajouter envoie du nom user en +
-        startActivityForResult(intent,3);
+        intent.putExtra("idUser",Integer.toString(idUser));
+        startActivity(intent);
     }
 
-    public void historique(View view){
+    public void historiqueAll(View view){
         Intent intent = new Intent(this,HistoriquePhrase.class);
-        //ajouter envoie du nom user en +
-        startActivityForResult(intent,4);
+        intent.putExtra("idUser",Integer.toString(idUser));
+        intent.putExtra("historique","all");
+        startActivity(intent);
+    }
+
+    public void historiqueUserOnly(View view){
+        Intent intent = new Intent(this,HistoriquePhrase.class);
+        intent.putExtra("idUser",Integer.toString(idUser));
+        intent.putExtra("historique","onlyUser");
+        startActivity(intent);
     }
 
     public void seDeconnecter(View view){
