@@ -17,10 +17,6 @@
             </intent-filter>
 
         </activity>
-        <activity   android:name=".MainActivity"
-                    android:label="MainActivity"
-                    android:parentActivityName="LoginScreen">
-        </activity>
 
         <activity   android:name=".MainMenu"
                     android:label="MainMenu"
@@ -41,6 +37,12 @@
                     android:label="HistoriquePhrase"
                     android:parentActivityName="MainMenu">
         </activity>
+
+        <activity   android:name=".Evaluation"
+                    android:label="Evaluation"
+                    android:parentActivityName="HistoriquePhrase">
+        </activity>
+
 
     </application>
 
