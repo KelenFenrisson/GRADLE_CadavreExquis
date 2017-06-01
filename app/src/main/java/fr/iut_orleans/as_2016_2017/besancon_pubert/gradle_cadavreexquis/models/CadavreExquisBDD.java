@@ -58,7 +58,7 @@ public class CadavreExquisBDD {
 
     public static final String TABLE_EVALUER = ProjectSQLiteOpenHelper.TABLE_EVALUER;
     private static final int EVALUER_COL_UTILISATEUR = 0;
-    private static final int EVALUER_COL_TEXTE = 1;
+    private static final int EVALUER_COL_HISTOIRE = 1;
     private static final int EVALUER_COL_DATE = 2;
     private static final int EVALUER_COL_NOTE = 3;
     private static final int EVALUER_COL_COMMENTAIRE = 4;
@@ -398,7 +398,7 @@ public class CadavreExquisBDD {
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associé à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
         values.put(ID_UTILISATEUR, evaluation.getUtilisateur_id());
-        values.put(ID_TEXTE, evaluation.getTexte_id());
+        values.put(ID_HISTOIRE, evaluation.getHistoire_id());
         values.put(DATE_EVALUER, evaluation.getDateEvaluation().getTime());
         values.put(NOTE_EVALUER, evaluation.getNote());
         values.put(COMMENTAIRE_EVALUER, evaluation.getCommentaire());
@@ -406,26 +406,26 @@ public class CadavreExquisBDD {
         return this.sqliteDatabase.insert(TABLE_EVALUER, null, values);
     }
 
-    public int updateEvaluation(int id_utilisateur, int id_texte, Evaluation evaluation) {
+    public int updateEvaluation(int id_utilisateur, int id_histoire, Evaluation evaluation) {
         //La mise à jour d'un utilisateur dans la BDD fonctionne plus ou moins comme une insertion
         //il faut simple préciser quel utilisateur on doit mettre à jour grâce à l'ID
         ContentValues values = new ContentValues();
         values.put(ID_UTILISATEUR, evaluation.getUtilisateur_id());
-        values.put(ID_TEXTE, evaluation.getTexte_id());
+        values.put(ID_HISTOIRE, evaluation.getHistoire_id());
         values.put(DATE_EVALUER, evaluation.getDateEvaluation().getTime());
         values.put(NOTE_EVALUER, evaluation.getNote());
         values.put(COMMENTAIRE_EVALUER, evaluation.getCommentaire());
-        return this.sqliteDatabase.update(TABLE_EVALUER, values, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_TEXTE + " = " + id_texte, null);
+        return this.sqliteDatabase.update(TABLE_EVALUER, values, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_HISTOIRE + " = " + id_histoire, null);
     }
 
-    public int removeEvaluationWithID(int id_utilisateur, int id_texte) {
+    public int removeEvaluationWithID(int id_utilisateur, int id_histoire) {
         //Suppression d'un livre de la BDD grâce à l'ID
-        return this.sqliteDatabase.delete(TABLE_EVALUER, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_TEXTE + " = " + id_texte, null);
+        return this.sqliteDatabase.delete(TABLE_EVALUER, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_HISTOIRE + " = " + id_histoire, null);
     }
 
-    public Evaluation getEvaluationWithID(int id_utilisateur, int id_texte) {
+    public Evaluation getEvaluationWithID(int id_utilisateur, int id_histoire) {
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son login)
-        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{ID_UTILISATEUR, ID_TEXTE, DATE_EVALUER, NOTE_EVALUER, COMMENTAIRE_EVALUER}, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_TEXTE + " = " + id_texte, null, null, null, null);
+        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{ID_UTILISATEUR, ID_HISTOIRE, DATE_EVALUER, NOTE_EVALUER, COMMENTAIRE_EVALUER}, ID_UTILISATEUR + " = " + id_utilisateur + " AND " + ID_HISTOIRE + " = " + id_histoire, null, null, null, null);
         return this.cursorToEvaluation(c);
     }
 
@@ -441,7 +441,7 @@ public class CadavreExquisBDD {
         Evaluation evaluation = new Evaluation();
         //on lui affecte toutes les infos grâce aux infos contenues dans le Cursor
         evaluation.setUtilisateur_id(c.getInt(EVALUER_COL_UTILISATEUR));
-        evaluation.setTexte_id(c.getInt(EVALUER_COL_TEXTE));
+        evaluation.setHistoire_id(c.getInt(EVALUER_COL_HISTOIRE));
         evaluation.setDateEvaluation(new Date());
         evaluation.getDateEvaluation().setTime(c.getInt(EVALUER_COL_DATE));
         evaluation.setNote(c.getInt(EVALUER_COL_NOTE));

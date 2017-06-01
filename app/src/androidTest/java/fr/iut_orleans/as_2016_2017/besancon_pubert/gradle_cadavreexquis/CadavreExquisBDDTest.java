@@ -80,8 +80,8 @@ public class CadavreExquisBDDTest {
         autrehistoire = new Histoire(2, autredate, "PanPan fait PAN!");
         texte = new Texte(1, date, contenu, utilisateur.getId(), histoire.getId());
         autretexte = new Texte(2, autredate, autrecontenu, autreutilisateur.getId(), autrehistoire.getId());
-        evaluation = new Evaluation(utilisateur.getId(), texte.getId(), date, note, commentaire);
-        autreevaluation = new Evaluation(autreutilisateur.getId(), autretexte.getId(), autredate, autrenote, autrecommentaire);
+        evaluation = new Evaluation(utilisateur.getId(), histoire.getId(), date, note, commentaire);
+        autreevaluation = new Evaluation(autreutilisateur.getId(), autrehistoire.getId(), autredate, autrenote, autrecommentaire);
 
         cadavreExquisBDD = new CadavreExquisBDD(this.appContext);
         cadavreExquisBDD.open();
@@ -178,23 +178,23 @@ public class CadavreExquisBDDTest {
         cadavreExquisBDD.insertTexte(autretexte);
         cadavreExquisBDD.insertEvaluation(evaluation);
         cadavreExquisBDD.insertEvaluation(autreevaluation);
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
-        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id()));
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id()));
 
-        Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id());
-        Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id());
+        Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id());
+        Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id());
         mod1.setNote(autrenote);
         mod1.setNote(note);
         cadavreExquisBDD.updateEvaluation(1,1, mod1);
         cadavreExquisBDD.updateEvaluation(2,2, mod2);
-            assertEquals("TEST cadavreExquisBDD.updateEvaluation 1", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
-        assertEquals("TEST cadavreExquisBDD.updateEvaluation 2", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
+            assertEquals("TEST cadavreExquisBDD.updateEvaluation 1", mod1, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id()));
+        assertEquals("TEST cadavreExquisBDD.updateEvaluation 2", mod2, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id()));
 
         cadavreExquisBDD.removeEvaluationWithID(1,1);
         cadavreExquisBDD.removeEvaluationWithID(2,2);
 
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation 1", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getTexte_id()));
-        assertEquals("TEST cadavreExquisBDD.removeEvaluation 2", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getTexte_id()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 1", null, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id()));
+        assertEquals("TEST cadavreExquisBDD.removeEvaluation 2", null, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id()));
     }
 
     @After

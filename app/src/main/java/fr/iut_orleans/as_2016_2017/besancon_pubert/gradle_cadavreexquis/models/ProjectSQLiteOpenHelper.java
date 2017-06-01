@@ -65,13 +65,13 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
             "CREATE TABLE "+TABLE_EVALUER+
                     " ( " +
                     ID_UTILISATEUR+" INTEGER,"+
-                    ID_TEXTE+" INTEGER,"+
+                    ID_HISTOIRE+" INTEGER,"+
                     DATE_EVALUER+" INTEGER,"+
                     NOTE_EVALUER+" INTEGER(2),"+
                     COMMENTAIRE_EVALUER+" VARCHAR(140),"+
-                    "  PRIMARY KEY ("+ID_UTILISATEUR+", "+ID_TEXTE+", "+DATE_EVALUER+")," +
+                    "  PRIMARY KEY ("+ID_UTILISATEUR+", "+ID_HISTOIRE+", "+DATE_EVALUER+")," +
                     "  FOREIGN KEY ("+ID_UTILISATEUR+") REFERENCES "+TABLE_UTILISATEUR+"("+ID_UTILISATEUR+")," +
-                    "  FOREIGN KEY ("+ID_TEXTE+") REFERENCES "+TABLE_TEXTE+"("+ID_TEXTE+")"+
+                    "  FOREIGN KEY ("+ID_HISTOIRE+") REFERENCES "+TABLE_HISTOIRE+"("+ID_HISTOIRE+")"+
                     ");";
     public static final String DROP_TABLE_EVALUER = "DROP TABLE IF EXISTS "+TABLE_EVALUER+";";
 
