@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
@@ -15,28 +16,38 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/lbl_storytitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_newstory" />
+        android:text="@string/app_storytitle"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:id="@+id/lbl_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/app_newstorytodo" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/txtinp_usersentence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.35"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:layout_weight="0.35" />
+        android:text="@string/app_writeyoursentence" />
+
+    <Button
+        android:id="@+id/btn_addsentence"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onBtnAddSentenceClick"
+        android:text="@string/app_validate" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_cancel" />
 </LinearLayout>
