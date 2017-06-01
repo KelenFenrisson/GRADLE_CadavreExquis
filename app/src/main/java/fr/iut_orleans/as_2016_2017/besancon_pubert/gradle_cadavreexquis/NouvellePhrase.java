@@ -29,13 +29,8 @@ public class NouvellePhrase extends Activity
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_nouvellephrase);
+        this.cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
-
-
-
-
-
-
     }
 
 

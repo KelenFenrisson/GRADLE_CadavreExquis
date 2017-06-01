@@ -429,6 +429,20 @@ public class CadavreExquisBDD {
         return this.cursorToEvaluation(c);
     }
 
+    public float getEvaluationAverageNoteForHistoire(int id_histoire){
+        int somme = 0;
+        int nb_notes=0;
+        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{NOTE_EVALUER}, ID_HISTOIRE + " = " + id_histoire, null, null, null, null);
+        while(c.moveToNext())
+        {
+            somme += c.getInt(1);
+            ++nb_notes;
+        }
+
+
+        return somme/nb_notes;
+    }
+
     //Cette méthode permet de convertir un cursor en un utilisateur
     private Evaluation cursorToEvaluation(Cursor c) {
         //si aucun élément n'a été retourné dans la requête, on renvoie null
