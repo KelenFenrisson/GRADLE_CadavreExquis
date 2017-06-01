@@ -8,9 +8,15 @@
     <string name="app_dummylogin">Player</string>
     <string name="app_dummypassword">Hunter2</string>
     <string name="app_log_in">Log In</string>
+    <string name="app_sign_in">Sign In</string>
     <string name="app_validate">Confirm</string>
     <string name="app_cancel">Cancel</string>
     <string name="app_yes">Yes</string>
     <string name="app_no">No</string>
-
+    <string name="app_newsentencescreen_title">New Sentence</string>
+    <string name="app_previously">Previously</string>
+    <string name="app_newstory">New Story</string>
+    <string name="app_storytitle">Story Title</string>
+    <string name="app_writeyoursentence">Write your sentence here ...</string>
+    <string name="app_newstorytodo">Lucky you ! you\'re starting a brand new story ! Write the first sentence, save it, and give your opus a title !</string>
 </resources>
