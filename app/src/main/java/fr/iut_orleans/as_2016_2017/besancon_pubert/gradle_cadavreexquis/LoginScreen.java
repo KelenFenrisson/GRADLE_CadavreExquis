@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.ProjectSQLiteOpenHelper;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
 
 public class LoginScreen extends Activity
@@ -22,6 +23,12 @@ public class LoginScreen extends Activity
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_loginscreen);
+        this.cadavreExquisBDD = new CadavreExquisBDD(this);
+        this.cadavreExquisBDD.open();
+        cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_UTILISATEURS);
+        cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_HISTOIRES);
+        cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_TEXTES);
+        this.cadavreExquisBDD.close();
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
     }

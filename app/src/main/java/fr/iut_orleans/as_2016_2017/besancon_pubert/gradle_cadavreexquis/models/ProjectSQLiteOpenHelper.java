@@ -22,7 +22,7 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
                     MDP_UTILISATEUR+" VARCHAR(32)"+
                     ");";
     public static final String DROP_TABLE_UTILISATEUR = "DROP TABLE IF EXISTS "+TABLE_UTILISATEUR+";";
-    public static final String INSERT_UTILISATEURS = "INSERT INTO "+TABLE_UTILISATEUR+" VALUES (1,'DarkSasuke93','Hunter2'),(2,'JordanBG75','mabite'),(3,'Lolita12ans','coucou'),(4,'AnusDestroyer','leetsquad'),(5,'TontonToucheTouche','bonbons')(6,'MathieuPubert','mathieu')(7,'JulienBesançon','julien');";
+    public static final String INSERT_UTILISATEURS = "INSERT INTO "+TABLE_UTILISATEUR+" VALUES (1,'DarkSasuke93','Hunter2'),(2,'JordanBG75','mabite'),(3,'Lolita12ans','coucou'),(4,'AnusDestroyer','leetsquad'),(5,'TontonToucheTouche','bonbons'),(6,'MathieuPubert','mathieu'),(7,'JulienBesançon','julien');";
 
 
     public static final String TABLE_HISTOIRE = "HISTOIRE";
@@ -56,14 +56,14 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
                     "FOREIGN KEY ("+ID_HISTOIRE+") REFERENCES "+TABLE_HISTOIRE+"("+ID_HISTOIRE+")"+
                     ");";
     public static final String DROP_TABLE_TEXTE = "DROP TABLE IF EXISTS "+TABLE_TEXTE+";";
-    public static final String INSERT_TEXTES = "INSERT INTO "+TABLE_HISTOIRE+" VALUES" +
-            "(1,1,1496304426,'Il etait une fois une poutre en chêne massif qui cherchait une maison.',1)" +
-            "(2,2,1496314426,'Un beau jour, dans ses recherches, elle trébucha sur un nid de poule.',1)" +
-            "(3,3,1496324426,'Ce qui déforma sa jante et énerva la poule propriétaire du nid.',1)" +
-            "(4,4,1496334426,'Mes oeufs sont tous cassés, dit la poule contrariée.',1)" +
-            "(5,5,1496344426,'Moralité : il faut caresser les oeufs et ne pas les frotter.',1)" +
-            "(6,6,1496354426,'Cendrillon, une jeune ado des quartiers pauvres, faisait le ménage chez la nouvelle pouf de son daron.',2)" +
-            "(7,7,1496364426,'Mon pote est venu me chercher chez moi a 19h et m'a dit : ce soir mec, tu vas prendre ... L'apéro avec moi',3)";
+    public static final String INSERT_TEXTES = "INSERT INTO "+TABLE_TEXTE+" VALUES" +
+            "(1,1,1496304426,'Il etait une fois une poutre en chêne massif qui cherchait une maison.',1)," +
+            "(2,2,1496314426,'Un beau jour, dans ses recherches, elle trébucha sur un nid de poule.',1)," +
+            "(3,3,1496324426,'Ce qui déforma sa jante et énerva la poule propriétaire du nid.',1)," +
+            "(4,4,1496334426,'Mes oeufs sont tous cassés, dit la poule contrariée.',1)," +
+            "(5,5,1496344426,'Moralité : il faut caresser les oeufs et ne pas les frotter.',1)," +
+            "(6,6,1496354426,'Cendrillon, une jeune ado des quartiers pauvres, faisait le ménage chez la nouvelle pouf de son daron.',2)," +
+            "(7,7,1496364426,'Mon pote est vient me chercher chez moi a 19h et me dit : ce soir mec, tu vas prendre ... Un apéro avec moi',3);";
 
 
 
@@ -95,10 +95,6 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(CREATE_TABLE_HISTOIRE);
         sqLiteDatabase.execSQL(CREATE_TABLE_TEXTE);
         sqLiteDatabase.execSQL(CREATE_TABLE_EVALUER);
-        sqLiteDatabase.execSQL(INSERT_HISTOIRES);
-        sqLiteDatabase.execSQL(INSERT_TEXTES);
-        sqLiteDatabase.execSQL(INSERT_UTILISATEURS);
-
     }
 
     @Override

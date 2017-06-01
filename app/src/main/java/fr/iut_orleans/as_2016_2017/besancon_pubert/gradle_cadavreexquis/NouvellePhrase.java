@@ -13,6 +13,7 @@ import java.util.Date;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Histoire;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.ProjectSQLiteOpenHelper;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Texte;
 
 public class NouvellePhrase extends Activity
@@ -29,6 +30,7 @@ public class NouvellePhrase extends Activity
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_nouvellephrase);
         cadavreExquisBDD.open();
+
 
 
 
@@ -71,7 +73,7 @@ public class NouvellePhrase extends Activity
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                titre = edittext.getText().toString();
+                //titre = edittext.getText().toString();
             }
         });
 
