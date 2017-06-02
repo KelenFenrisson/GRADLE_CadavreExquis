@@ -55,7 +55,12 @@ public class Evaluation extends Activity {
 //        texteHistoire.setText(histoireComplette);
 
         //TODO une méthode de cadavreExquisBDD.userDoEvaluation(idUser,idHistoire)   return bool
-        //TODO une méthode de cadavreExquisBDD.getMoyenneEvaluation(idhistoire)      return float
+        //TODO REPONSE => je ne ferai pas mieux que ça : (this.cadavreExquisBDD.getEvalutaionWithID(int userID, int histoireID)==null)
+
+
+        //TODO une méthode de int getEvaluationAverageNoteForHistoire(int id_histoire)
+        //TODO REPONSE => fait
+
 //        if(cadavreExquisBDD.userDoEvaluation(idUser,idHistoire)){
 //            groupeRadioBoutton.setVisibility(View.GONE);
 //            evaluation = cadavreExquisBDD.getMoyenneEvaluation(idHistoire);

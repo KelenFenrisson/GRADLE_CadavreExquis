@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Evaluation {
 
     private Integer utilisateur_id;
-    private Integer texte_id;
+    private Integer histoire_id;
     private Date dateEvaluation;
     private Integer note;
     private String commentaire;
@@ -21,9 +21,9 @@ public class Evaluation {
     public Evaluation() {
     }
 
-    public Evaluation(Integer utilisateur_id, Integer texte_id, Date dateEvaluation, Integer note, String commentaire) {
+    public Evaluation(Integer utilisateur_id, Integer histoire_id, Date dateEvaluation, Integer note, String commentaire) {
         this.utilisateur_id = utilisateur_id;
-        this.texte_id = texte_id;
+        this.histoire_id = histoire_id;
         this.dateEvaluation = dateEvaluation;
         this.note = note;
         this.commentaire = commentaire;
@@ -33,8 +33,8 @@ public class Evaluation {
         return utilisateur_id;
     }
 
-    public Integer getTexte_id() {
-        return texte_id;
+    public Integer getHistoire_id() {
+        return histoire_id;
     }
 
     public Date getDateEvaluation() {
@@ -53,8 +53,8 @@ public class Evaluation {
         this.utilisateur_id = utilisateur_id;
     }
 
-    public void setTexte_id(Integer texte_id) {
-        this.texte_id = texte_id;
+    public void setHistoire_id(Integer histoire_id) {
+        this.histoire_id = histoire_id;
     }
 
     public void setDateEvaluation(Date dateEvaluation) {
@@ -75,7 +75,7 @@ public class Evaluation {
         if (o == null || getClass() != o.getClass()) return false;
         Evaluation that = (Evaluation) o;
         return Objects.equals(utilisateur_id, that.utilisateur_id) &&
-                Objects.equals(texte_id, that.texte_id) &&
+                Objects.equals(histoire_id, that.histoire_id) &&
                 Objects.equals(dateEvaluation, that.dateEvaluation) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(commentaire, that.commentaire);
@@ -83,14 +83,14 @@ public class Evaluation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(utilisateur_id, texte_id, dateEvaluation, note, commentaire);
+        return Objects.hash(utilisateur_id, histoire_id, dateEvaluation, note, commentaire);
     }
 
     @Override
     public String toString() {
         return "Evaluation{" +
                 "utilisateur_id=" + utilisateur_id +
-                ", texte_id=" + texte_id +
+                ", histoire_id=" + histoire_id +
                 ", dateEvaluation=" + dateEvaluation +
                 ", note=" + note +
                 ", commentaire='" + commentaire + '\'' +

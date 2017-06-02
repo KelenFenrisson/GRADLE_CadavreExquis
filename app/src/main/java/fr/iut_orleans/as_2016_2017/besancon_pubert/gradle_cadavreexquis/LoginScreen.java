@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.CadavreExquisBDD;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.ProjectSQLiteOpenHelper;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
 
 public class LoginScreen extends Activity
@@ -22,6 +23,15 @@ public class LoginScreen extends Activity
     {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_loginscreen);
+        this.cadavreExquisBDD = new CadavreExquisBDD(this);
+        this.cadavreExquisBDD.open();
+
+        if(this.cadavreExquisBDD.getUtilisateurWithID(1) == null){
+            cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_UTILISATEURS);
+            cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_HISTOIRES);
+            cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_TEXTES);
+        }
+
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
     }
@@ -49,12 +59,10 @@ public class LoginScreen extends Activity
 
     public boolean checkCredentials(String login, String password){
 
-        cadavreExquisBDD = new CadavreExquisBDD(this);
-        cadavreExquisBDD.open();
         Utilisateur utilisateur = cadavreExquisBDD.getUtilisateurWithLogin(login);
         if (utilisateur!=null)
             idUser = utilisateur.getId();
-        cadavreExquisBDD.close();
+
 
         return utilisateur != null && utilisateur.getMotDePasse().equals(password);
     }
@@ -77,4 +85,9 @@ public class LoginScreen extends Activity
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        this.cadavreExquisBDD.close();
+        super.onDestroy();
+    }
 }

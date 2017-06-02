@@ -13,4 +13,11 @@
     <string name="app_validate">Confirmer</string>
     <string name="app_yes">Oui</string>
     <string name="app_welcome">Bienvenue !</string>
+    <string name="app_newsentencescreen_title">Nouvelle Phrase</string>
+    <string name="app_newstory">Nouvelle Histoire</string>
+    <string name="app_previously">Précédement</string>
+    <string name="app_sign_in">S\'inscrire</string>
+    <string name="app_writeyoursentence">Complétez l\'histoire ici</string>
+    <string name="app_storytitle">Titre de l\'histoire</string>
+    <string name="app_newstorytodo">Petit veinard ! Vous commencez une nouvelle histoire ! Ecrivez en la premiere phras, nous lui donnerons un titre juste après !</string>
 </resources>
