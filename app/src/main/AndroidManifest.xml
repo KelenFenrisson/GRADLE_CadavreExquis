@@ -38,8 +38,8 @@
                     android:parentActivityName="MainMenu">
         </activity>
 
-        <activity   android:name=".Evaluation"
-                    android:label="Evaluation"
+        <activity   android:name=".EvaluationScreen"
+                    android:label="EvaluationScreen"
                     android:parentActivityName="HistoriquePhrase">
         </activity>
 

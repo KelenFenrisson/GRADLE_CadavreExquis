@@ -28,7 +28,7 @@ public class MainMenu extends Activity
         cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
         user = cadavreExquisBDD.getUtilisateurWithID(idUser);
-        String message = "Bonjour, "+user.getLogin();
+        String message = "Session de "+user.getLogin();
         TextView texte = (TextView)findViewById(R.id.textView);
         texte.setText(message);
     }
@@ -54,6 +54,15 @@ public class MainMenu extends Activity
     }
 
     public void seDeconnecter(View view){
+        Intent intent = new Intent ();
+        intent.putExtra("deco", "Déconnexion");
+        setResult(Activity.RESULT_OK , intent );
+        super.finish ();
+    }
+
+    @Override
+    public void finish ()
+    {
         Intent intent = new Intent ();
         intent.putExtra("deco", "Déconnexion");
         setResult(Activity.RESULT_OK , intent );

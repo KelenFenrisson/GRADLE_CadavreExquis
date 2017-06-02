@@ -39,7 +39,7 @@ public class HistoriquePhrase extends Activity {
         String histo = intentId.getStringExtra("historique");
         idUser = Integer.parseInt(intentId.getStringExtra("idUser"));
 
-        intent = new Intent(this,Evaluation.class);
+        intent = new Intent(this,EvaluationScreen.class);
         intent.putExtra("idUser",Integer.toString(idUser));
 
         listeElem = new ArrayList<String>();
@@ -57,15 +57,9 @@ public class HistoriquePhrase extends Activity {
             listeHistoire = cadavreExquisBDD.getAllHistoireFromUtilisateurID(idUser);
         }
 
-        listeElem.add("Pommes");
-
         cadavreExquisBDD.close();
         for(Histoire titre : listeHistoire)
             listeElem.add(titre.getTitre());
-
-
-        listeElem.add("Poires");
-        listeElem.add("Cerises");
 
         //association adapteur avec la listeview
         adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, listeElem);
@@ -75,8 +69,8 @@ public class HistoriquePhrase extends Activity {
         listeV1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Histoire histoire = listeHistoire.get(i);
-//                intent.putExtra("idHistoire",Integer.toString(histoire.getId()));
+                Histoire histoire = listeHistoire.get(i);
+                intent.putExtra("idHistoire",Integer.toString(histoire.getId()));
                 intent.putExtra("idUser",Integer.toString(idUser));
                 startActivityForResult(intent,1);
             }

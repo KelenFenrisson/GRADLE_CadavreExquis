@@ -2,38 +2,135 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"/>
-    <Button
-        android:text="Nouvelle Partie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="jouer"/>
-    <Button
-        android:text="Afficher toutes les histoires"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonAll"
-        android:onClick="historiqueAll"/>
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonOnlyUser"
+    <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="historiqueUserOnly"
-        android:text="Afficher mes histoires" />
+        android:layout_weight="0.1" />
 
-    <Button
-        android:text="Se déconnecter"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button4"
-        android:onClick="seDeconnecter"/>
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="jouer"
+            android:text="Nouvelle Partie" />
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/buttonAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="historiqueAll"
+            android:text="Afficher toutes les histoires" />
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/buttonOnlyUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="historiqueUserOnly"
+            android:text="Afficher mes histoires" />
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="seDeconnecter"
+            android:text="Se déconnecter" />
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </LinearLayout>

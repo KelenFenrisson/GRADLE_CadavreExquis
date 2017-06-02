@@ -87,9 +87,26 @@
         </RadioGroup>
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/commentaireUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="test" />
+        android:text="Ajouter un commentaire" />
+
+    <EditText
+        android:id="@+id/Add_commentaire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        />
+
+    <Button
+        android:id="@+id/ajouterEval"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:text="Valider évaluation"
+        android:onClick="ajouterEval"
+    />
 
 </LinearLayout>
