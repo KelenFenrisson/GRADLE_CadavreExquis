@@ -61,7 +61,7 @@ public class EvaluationScreen extends Activity {
         cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
         user = cadavreExquisBDD.getUtilisateurWithID(idUser);
-        texteUser.setText("Session " + user.getLogin());
+        texteUser.setText("Session de" + user.getLogin());
 
         histoire = cadavreExquisBDD.getHistoireWithID(idHistoire);
         texteTitre.setText(histoire.getTitre());

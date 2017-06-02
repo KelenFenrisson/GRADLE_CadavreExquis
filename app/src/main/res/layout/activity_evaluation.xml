@@ -9,19 +9,43 @@
         android:id="@+id/textUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="C'est juste pour tester les notes !!! et pour marquer le user" />
+        android:text="Session de "
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05" />
 
     <TextView
         android:id="@+id/textTitreHistoire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titre de l'histoire " />
+        android:text="Titre de l'histoire "
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.06" />
 
     <TextView
         android:id="@+id/textHistoireComplette"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="15sp"
         android:text="L'histoire complette" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15" />
 
     <TextView
         android:id="@+id/textNote"
@@ -29,6 +53,11 @@
         android:layout_height="wrap_content"
         android:text="Note Moyenne" />
 
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -84,7 +113,12 @@
             android:layout_weight="0.04"
             android:onClick="onRadioButtonClicked"/>
 
-        </RadioGroup>
+    </RadioGroup>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.14" />
 
     <TextView
         android:id="@+id/commentaireUser"
@@ -101,12 +135,33 @@
         android:text=""
         />
 
-    <Button
-        android:id="@+id/ajouterEval"
-        android:layout_width="202dp"
+    <Space
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Valider évaluation"
-        android:onClick="ajouterEval"
-    />
+        android:layout_weight="0.07" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/ajouterEval"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="ajouterEval"
+            android:text="Valider évaluation" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </LinearLayout>
