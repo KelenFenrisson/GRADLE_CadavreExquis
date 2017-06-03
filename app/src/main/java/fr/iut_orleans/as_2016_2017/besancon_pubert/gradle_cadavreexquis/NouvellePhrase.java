@@ -2,6 +2,7 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -15,9 +16,11 @@ import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.C
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Histoire;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.ProjectSQLiteOpenHelper;
 import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Texte;
+import fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis.models.Utilisateur;
 
 public class NouvellePhrase extends Activity
 {
+    Utilisateur utilisateur;
     Histoire histoire;
     Texte texte;
     CadavreExquisBDD cadavreExquisBDD;
@@ -31,31 +34,28 @@ public class NouvellePhrase extends Activity
         this.setContentView(R.layout.activity_nouvellephrase);
         this.cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
+        utilisateur = cadavreExquisBDD.getUtilisateurWithID(Integer.parseInt(getIntent().getStringExtra("idUser")));
     }
 
 
     public void onBtnAddSentenceClick(View view){
-        EditText phraseUtilisateur = (EditText) (findViewById(R.id.txtinp_usersentence));
+        String phraseUtilisateur = ((EditText) (findViewById(R.id.txtinp_usersentence))).getText().toString();
         //regarder si il y a une histoire comportant moins de 5 textes
-        // histoire = cadavreExquisBDD.getFirstHistoireToComplete();
-        histoire = null;
 
-        if(histoire != null) {
-            // Si il y en a une, recuperer son id pour la future insertion de texte
+        histoire = cadavreExquisBDD.getHistoireToComplete();
 
+        if(histoire == null) {
+            histoire = cadavreExquisBDD.getHistoireWithID((int)(cadavreExquisBDD.insertHistoire(new Histoire(new Date(System.currentTimeMillis()), getTitleFromAlertBox()))));
         }
-        else{
 
-        }
-        // Sinon, on en commence une.
-        histoire = new Histoire(new Date(), getTitleFromAlertBox());
-        //
+        cadavreExquisBDD.insertTexte(new Texte(new Date(System.currentTimeMillis()), phraseUtilisateur, utilisateur.getId(), histoire.getId()));
 
+        this.finish();
     }
 
     public String getTitleFromAlertBox(){
 
-        String titre = "";
+        final String[] titre = {""};
 
         final EditText edittext = new EditText(this);
         edittext.setText("Write the new title here.");
@@ -68,7 +68,7 @@ public class NouvellePhrase extends Activity
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                //titre = edittext.getText().toString();
+                titre[0] = edittext.getText().toString();
             }
         });
 
@@ -80,9 +80,15 @@ public class NouvellePhrase extends Activity
 
         alert.show();
 
-        return titre;
+        return titre[0];
     }
 
+    @Override
+    public void finish() {
+        Intent intent = new Intent ();
+        setResult(Activity.RESULT_OK , intent );
+        super.finish();
+    }
 
     @Override
     protected void onDestroy() {

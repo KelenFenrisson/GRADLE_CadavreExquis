@@ -181,6 +181,9 @@ public class CadavreExquisBDDTest {
         assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", evaluation, cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id()));
         assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autreevaluation, cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id()));
 
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 1", note.floatValue(), cadavreExquisBDD.getEvaluationAverageNoteForHistoire(evaluation.getHistoire_id()), 0.0);
+        assertEquals("TEST cadavreExquisBDD.getEvaluationWithID 2", autrenote.floatValue(), cadavreExquisBDD.getEvaluationAverageNoteForHistoire(autreevaluation.getHistoire_id()), 0.0);
+
         Evaluation mod1 = cadavreExquisBDD.getEvaluationWithID(evaluation.getUtilisateur_id(), evaluation.getHistoire_id());
         Evaluation mod2 = cadavreExquisBDD.getEvaluationWithID(autreevaluation.getUtilisateur_id(), autreevaluation.getHistoire_id());
         mod1.setNote(autrenote);

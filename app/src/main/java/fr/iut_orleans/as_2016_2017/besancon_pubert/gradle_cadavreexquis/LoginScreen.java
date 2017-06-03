@@ -30,6 +30,7 @@ public class LoginScreen extends Activity
             cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_UTILISATEURS);
             cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_HISTOIRES);
             cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_TEXTES);
+            cadavreExquisBDD.getBDD().execSQL(ProjectSQLiteOpenHelper.INSERT_EVALUER);
         }
 
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);

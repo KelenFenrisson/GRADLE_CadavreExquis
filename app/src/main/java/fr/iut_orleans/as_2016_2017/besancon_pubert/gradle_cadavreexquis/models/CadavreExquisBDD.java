@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -199,6 +200,20 @@ public class CadavreExquisBDD {
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son login)
         Cursor c = this.sqliteDatabase.query(TABLE_HISTOIRE, new String[]{ID_HISTOIRE, DATE_HISTOIRE, TITRE_HISTOIRE}, ID_HISTOIRE + " = \"" + id + "\"", null, null, null, null);
         return cursorToHistoire(c);
+    }
+
+    public Histoire getHistoireToComplete(){
+        Histoire tocomplete = null;
+
+        for(Histoire h : getAllHistoire())
+        {
+            if(getTextesArrayListWithHistoireID(h.getId()).size()<5)
+            {
+                tocomplete=h;
+            }
+        }
+
+        return tocomplete;
     }
 
     public ArrayList<Histoire> getAllHistoire(){
@@ -430,17 +445,22 @@ public class CadavreExquisBDD {
     }
 
     public float getEvaluationAverageNoteForHistoire(int id_histoire){
-        int somme = 0;
-        int nb_notes=0;
-        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{NOTE_EVALUER}, ID_HISTOIRE + " = " + id_histoire, null, null, null, null);
-        while(c.moveToNext())
-        {
-            somme += c.getInt(1);
-            ++nb_notes;
+//        float somme = 0;
+//        float nb_notes=0;
+//        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{NOTE_EVALUER}, ID_HISTOIRE + " = " + id_histoire, null, null, null, null);
+//        while(c.moveToNext())
+//        {
+//            somme += c.getInt(0);
+//            ++nb_notes;
+//        }
+//        return somme/nb_notes;
+        Float avg = null;
+        Cursor c = this.sqliteDatabase.rawQuery(String.format("SELECT avg(%1$s) FROM %2$s WHERE %3$s = %4$s;", NOTE_EVALUER, TABLE_EVALUER, ID_HISTOIRE, id_histoire), null, null);
+        if(c.moveToFirst()) {
+            Log.i("cadavre_exquis", c.toString());
+            avg = Float.parseFloat(c.getString(0));
         }
-
-
-        return somme/nb_notes;
+        return avg;
     }
 
     //Cette méthode permet de convertir un cursor en un utilisateur

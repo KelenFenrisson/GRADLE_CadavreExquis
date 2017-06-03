@@ -22,7 +22,14 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
                     MDP_UTILISATEUR+" VARCHAR(32)"+
                     ");";
     public static final String DROP_TABLE_UTILISATEUR = "DROP TABLE IF EXISTS "+TABLE_UTILISATEUR+";";
-    public static final String INSERT_UTILISATEURS = "INSERT INTO "+TABLE_UTILISATEUR+" VALUES (1,'DarkSasuke93','Hunter2'),(2,'JordanBG75','mabite'),(3,'Lolita12ans','coucou'),(4,'AnusDestroyer','leetsquad'),(5,'TontonToucheTouche','bonbons'),(6,'MathieuPubert','mathieu'),(7,'JulienBesançon','julien');";
+    public static final String INSERT_UTILISATEURS = "INSERT INTO "+TABLE_UTILISATEUR+" VALUES " +
+            "(1,'DarkSasuke93','Hunter2')," +
+            "(2,'JordanBG75','mabite')," +
+            "(3,'Lolita12ans','coucou')," +
+            "(4,'AnusDestroyer','leetsquad')," +
+            "(5,'TontonToucheTouche','bonbons')," +
+            "(6,'MathieuPubert','mathieu')," +
+            "(7,'JulienBesançon','julien');";
 
 
     public static final String TABLE_HISTOIRE = "HISTOIRE";
@@ -37,7 +44,10 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
                     TITRE_HISTOIRE+" VARCHAR(50)"+
                     ");";
     public static final String DROP_TABLE_HISTOIRE = "DROP TABLE IF EXISTS "+TABLE_HISTOIRE+";";
-    public static final String INSERT_HISTOIRES = "INSERT INTO "+TABLE_HISTOIRE+" VALUES (1,1496304426,'Le gros baton et le petit trou'),(2,1496314426,'Cendrillon : Reboot'),(3,1496324426,'Ce soir tu vas prendre ...');";
+    public static final String INSERT_HISTOIRES = "INSERT INTO "+TABLE_HISTOIRE+" VALUES " +
+            "(1,1496304426,'Le gros baton et le petit trou')," +
+            "(2,1496314426,'Cendrillon : Reboot')," +
+            "(3,1496324426,'Ce soir tu vas prendre ...');";
 
 
     public static final String TABLE_TEXTE = "TEXTE";
@@ -84,6 +94,28 @@ public class ProjectSQLiteOpenHelper extends SQLiteOpenHelper{
                     "  FOREIGN KEY ("+ID_HISTOIRE+") REFERENCES "+TABLE_HISTOIRE+"("+ID_HISTOIRE+")"+
                     ");";
     public static final String DROP_TABLE_EVALUER = "DROP TABLE IF EXISTS "+TABLE_EVALUER+";";
+    public static final String INSERT_EVALUER = "INSERT INTO "+TABLE_EVALUER+" VALUES" +
+            "(1,1,1496514426, 3, 'G ecris dans cette histoire ! LOL')," +
+            "(2,1,1496514426, 3, 'Jordan est un teubé')," +
+            "(3,1,1496514426, 3, 'LOLXDPTDR c tro nimp !')," +
+            "(4,1,1496514426, 3, 'Lolita ta kel aj ?')," +
+            "(5,1,1496514426, 3, '...')," +
+            "(6,1,1496514426, 5, 'Je suis plutôt content du resultat !')," +
+            "(7,1,1496514426, 1, 'Cette appli m_a pris trop de temps a developper')," +
+            "(1,2,1496514426, 1, 'First !')," +
+            "(2,2,1496514426, 1, 'Non pas First gros con, il y a l_auteur avant !')," +
+            "(3,2,1496514426, 1, '+1')," +
+            "(4,2,1496514426, 1, '+1. Cette histoir è nul !')," +
+            "(5,2,1496514426, 1, 'Il faudrait creuser... Pour enterrer cette histoire.')," +
+            "(6,2,1496514426, 3, 'Mon meilleur niveau')," +
+            "(7,2,1496514426, 1, 'Hmm... On peut faire BEAUCOUP mieux')," +
+            "(1,3,1496514426, 5, 'Trodlabal !')," +
+            "(2,3,1496514426, 5, 'Up')," +
+            "(3,3,1496514426, 5, 'J_aime les poneys')," +
+            "(4,3,1496514426, 5, '+1')," +
+            "(5,3,1496514426, 5, 'Epoustouflant. Telerama.')," +
+            "(6,3,1496514426, 5, 'LE prochain Goncourt')," +
+            "(7,3,1496514426, 3, 'Je m_emmerde !!!!!');";
 
     public ProjectSQLiteOpenHelper(Context context, String name, CursorFactory cursorFactory, int version){
         super(context, name, cursorFactory, version);

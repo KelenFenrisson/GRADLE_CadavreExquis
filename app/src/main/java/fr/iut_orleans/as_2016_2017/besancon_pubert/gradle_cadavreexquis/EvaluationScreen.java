@@ -77,10 +77,9 @@ public class EvaluationScreen extends Activity {
             comm.setVisibility(View.GONE);
             validerEval.setVisibility(View.GONE);
 
-//            noteMoyenne = cadavreExquisBDD.getEvaluationAverageNoteForHistoire(idHistoire);
-            noteMoyenne = cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getNote();
+            noteMoyenne = cadavreExquisBDD.getEvaluationAverageNoteForHistoire(idHistoire);
 
-            texteNote.setText("La Note que vous avez mis sur cette histoire est : "+ Float.toString(noteMoyenne));
+            texteNote.setText("La Note que vous avez mis sur cette histoire est : "+ Float.toString(cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getNote()) + ". Avec les autres utilisateurs, cela fait une mouyenne de "+noteMoyenne+" !");
             add_comm.setText(""+cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getCommentaire());
         }
         else
