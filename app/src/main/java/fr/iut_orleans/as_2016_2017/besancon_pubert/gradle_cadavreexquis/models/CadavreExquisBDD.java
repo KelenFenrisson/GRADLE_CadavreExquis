@@ -486,4 +486,29 @@ public class CadavreExquisBDD {
         return evaluation;
     }
 
+    private ArrayList<Evaluation> cursorToListeEvaluation(Cursor c) {
+        ArrayList<Evaluation> evaluations = new ArrayList<>();
+        Evaluation e;
+        while (c.moveToNext()) {
+            e = new Evaluation(
+                    c.getInt(EVALUER_COL_UTILISATEUR),
+                    c.getInt(EVALUER_COL_HISTOIRE),
+                    new Date(c.getInt(EVALUER_COL_DATE)),
+                    c.getInt(TEXTE_COL_CONTENU),
+                    c.getString(TEXTE_COL_HISTOIRE));
+
+            evaluations.add(e);
+        }
+        return evaluations;
+    }
+
+
+    public ArrayList<Evaluation> getAllEvaluationByhistoire(int id_histoire){
+        // Recupere toutes les histoires et les renvoie sous forme d'ArrayList
+        Cursor c = this.sqliteDatabase.query(TABLE_EVALUER, new String[]{ID_UTILISATEUR, ID_HISTOIRE, DATE_EVALUER, NOTE_EVALUER, COMMENTAIRE_EVALUER}, ID_HISTOIRE + " = "+id_histoire, null, null, null, null);
+        return cursorToListeEvaluation(c);
+    }
+
+
+
 }

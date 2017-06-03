@@ -121,6 +121,16 @@
         android:layout_weight="0.14" />
 
     <TextView
+        android:id="@+id/commentaireAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Commentaires"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    />
+
+    <TextView
         android:id="@+id/commentaireUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -52,6 +52,8 @@ public class EvaluationScreen extends Activity {
         TextView texteHistoire = (TextView) findViewById(R.id.textHistoireComplette);
         TextView texteNote = (TextView) findViewById(R.id.textNote);
         RadioGroup groupeRadioBoutton = (RadioGroup) findViewById(R.id.groupRadioButtonAll);
+        TextView commTitre = (TextView) findViewById(R.id.commentaireAll);
+
         TextView add_comm = (TextView) findViewById(R.id.commentaireUser);
         comm = (EditText)findViewById(R.id.Add_commentaire);
         Button validerEval=(Button)findViewById(R.id.ajouterEval);
@@ -78,15 +80,24 @@ public class EvaluationScreen extends Activity {
             validerEval.setVisibility(View.GONE);
 
             noteMoyenne = cadavreExquisBDD.getEvaluationAverageNoteForHistoire(idHistoire);
-
             texteNote.setText("La Note que vous avez mis sur cette histoire est : "+ Float.toString(cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getNote()) + ". \n La moyenne des notes est de : "+noteMoyenne+" !");
-            add_comm.setText(""+cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getCommentaire());
+
+            String comm ="\n\n";
+
+            for(Evaluation eval : cadavreExquisBDD.getAllEvaluationByhistoire(idHistoire)){
+                comm += cadavreExquisBDD.getUtilisateurWithID(eval.getUtilisateur_id()).getLogin() +" : " +eval.getCommentaire()+"\n\n";
+            }
+
+            add_comm.setText(comm);
+
+
         }
         else
         {
             texteNote.setText("Notez l'histoire");
             groupeRadioBoutton.setVisibility(View.VISIBLE);
             comm.setVisibility(View.VISIBLE);
+            commTitre.setVisibility(View.GONE);
 
         }
         cadavreExquisBDD.close();
