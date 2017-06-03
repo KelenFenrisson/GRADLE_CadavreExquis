@@ -61,7 +61,7 @@ public class EvaluationScreen extends Activity {
         cadavreExquisBDD = new CadavreExquisBDD(this);
         cadavreExquisBDD.open();
         user = cadavreExquisBDD.getUtilisateurWithID(idUser);
-        texteUser.setText("Session de" + user.getLogin());
+        texteUser.setText("Session de " + user.getLogin());
 
         histoire = cadavreExquisBDD.getHistoireWithID(idHistoire);
         texteTitre.setText(histoire.getTitre());
@@ -79,7 +79,7 @@ public class EvaluationScreen extends Activity {
 
             noteMoyenne = cadavreExquisBDD.getEvaluationAverageNoteForHistoire(idHistoire);
 
-            texteNote.setText("La Note que vous avez mis sur cette histoire est : "+ Float.toString(cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getNote()) + ". Avec les autres utilisateurs, cela fait une mouyenne de "+noteMoyenne+" !");
+            texteNote.setText("La Note que vous avez mis sur cette histoire est : "+ Float.toString(cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getNote()) + ". \n La moyenne des notes est de : "+noteMoyenne+" !");
             add_comm.setText(""+cadavreExquisBDD.getEvaluationWithID(idUser,idHistoire).getCommentaire());
         }
         else

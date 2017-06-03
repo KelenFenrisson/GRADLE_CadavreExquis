@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class HistoriquePhrase extends Activity {
         Intent intentId = getIntent ();
         String histo = intentId.getStringExtra("historique");
         idUser = Integer.parseInt(intentId.getStringExtra("idUser"));
+        TextView texteTitre = (TextView) findViewById(R.id.textTitreHistoriquePhrase);
+
 
         intent = new Intent(this,EvaluationScreen.class);
         intent.putExtra("idUser",Integer.toString(idUser));
@@ -50,11 +53,14 @@ public class HistoriquePhrase extends Activity {
         //vient du main avec clique sur le bouton TOUTES LES HISTOIRES
         if(histo.equals("all")){
             listeHistoire = cadavreExquisBDD.getAllHistoire();
+            texteTitre.setText("Toutes les histoires");
+
         }
 
         //vient du main avec clique sur le bouton MES HISTOIRES
         if(histo.equals("onlyUser")){
             listeHistoire = cadavreExquisBDD.getAllHistoireFromUtilisateurID(idUser);
+            texteTitre.setText("Mes histoires");
         }
 
         cadavreExquisBDD.close();
