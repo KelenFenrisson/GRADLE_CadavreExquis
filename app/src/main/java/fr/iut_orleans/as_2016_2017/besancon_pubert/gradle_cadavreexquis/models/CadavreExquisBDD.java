@@ -202,18 +202,17 @@ public class CadavreExquisBDD {
         return cursorToHistoire(c);
     }
 
-    public Histoire getHistoireToComplete(){
-        Histoire tocomplete = null;
 
-        for(Histoire h : getAllHistoire())
-        {
-            if(getTextesArrayListWithHistoireID(h.getId()).size()<5)
-            {
-                tocomplete=h;
-            }
-        }
+    public Histoire getHistoireToCompleteForUser(int id_utilisateur){
 
-        return tocomplete;
+        String req = String.format("SELECT * FROM HISTOIRE WHERE " +
+                "%1$s IN (SELECT %1$s FROM TEXTE GROUP BY %1$s HAVING count(%2$s)<5 ORDER BY %5$s ASC) " +
+                "AND %1$s NOT IN (SELECT %1$s FROM TEXTE WHERE %3$s = %4$s)", ID_HISTOIRE, ID_TEXTE, ID_UTILISATEUR,id_utilisateur, DATE_TEXTE);
+
+        Cursor c = this.sqliteDatabase.rawQuery(req, null, null);
+
+
+        return this.cursorToHistoire(c);
     }
 
     public ArrayList<Histoire> getAllHistoire(){
@@ -230,7 +229,6 @@ public class CadavreExquisBDD {
                 "WHERE "+ID_UTILISATEUR+"="+id+";",
                 null
         );
-
         return cursorToListeHistoire(c);
     }
 
@@ -244,6 +242,21 @@ public class CadavreExquisBDD {
         );
 
         return cursorToListeHistoire(c);
+    }
+
+    public ArrayList<Histoire> getCompleteHistoireList(){
+
+        Cursor c =this.sqliteDatabase.rawQuery(String.format("SELECT * FROM HISTOIRE h WHERE %1$s IN (" +
+                "SELECT %1$s FROM TEXTE WHERE %1$s = h.%1$s GROUP BY %1$s HAVING count(%2$s)>=5 ORDER BY %3$s ASC)",ID_HISTOIRE, ID_TEXTE,DATE_TEXTE), null, null);
+
+        return cursorToListeHistoire(c);
+    }
+
+    public boolean isCompleteHistoire(int id_histoire){
+
+        Cursor c = this.sqliteDatabase.query(TABLE_TEXTE, new String[]{ID_HISTOIRE},ID_HISTOIRE + "="+Integer.toString(id_histoire),new String[]{ID_HISTOIRE}, "count("+ID_TEXTE+")>=5", null, null );
+
+        return cursorToHistoire(c)==null;
     }
 
     private ArrayList<Histoire> cursorToListeHistoire(Cursor c){
@@ -332,6 +345,15 @@ public class CadavreExquisBDD {
         //Récupère dans un Cursor les valeur correspondant à un utilisateur contenu dans la BDD (ici on sélectionne l'utilisateur grâce à son id)
         Cursor c = this.sqliteDatabase.query(TABLE_TEXTE, new String[]{ID_TEXTE, ID_UTILISATEUR, DATE_TEXTE, CONTENU_TEXTE, ID_HISTOIRE}, ID_TEXTE + " = \"" + id + "\"", null, null, null, null);
         return this.cursorToTexte(c);
+    }
+
+    public Texte getLastTexteFrom(int id_histoire){
+
+//        String req = String.format("SELECT * FROM TEXTE WHERE %1$s <= ANY( SELECT %1$s FROM TEXTE WHERE %2$s = %3$s);", DATE_TEXTE, ID_HISTOIRE, id_histoire);
+//        Cursor c = this.sqliteDatabase.rawQuery(req,null, null);
+        Cursor c = sqliteDatabase.query(TABLE_TEXTE, new String[]{ID_TEXTE, ID_UTILISATEUR, DATE_TEXTE, CONTENU_TEXTE, ID_HISTOIRE}, DATE_TEXTE+" IN ( SELECT min("+DATE_TEXTE+") FROM TEXTE WHERE "+ID_HISTOIRE+" = "+id_histoire+")", null, null, null, null);
+
+        return cursorToTexte(c);
     }
 
 

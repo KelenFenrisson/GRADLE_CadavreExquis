@@ -19,4 +19,5 @@
     <string name="app_storytitle">Story Title</string>
     <string name="app_writeyoursentence">Write your sentence here ...</string>
     <string name="app_newstorytodo">Lucky you ! you\'re starting a brand new story ! Write the first sentence, save it, and give your opus a title !</string>
+    <string name="app_inputnewtitle">Give this new story a cool title !</string>
 </resources>

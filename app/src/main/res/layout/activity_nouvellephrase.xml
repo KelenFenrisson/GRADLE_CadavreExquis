@@ -15,13 +15,14 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/lbl_storytitle"
+    <EditText
+        android:id="@+id/txtinput_newtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_storytitle"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/app_inputnewtitle"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/lbl_story"
@@ -49,5 +50,6 @@
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onBtnCancelClick"
         android:text="@string/app_cancel" />
 </LinearLayout>

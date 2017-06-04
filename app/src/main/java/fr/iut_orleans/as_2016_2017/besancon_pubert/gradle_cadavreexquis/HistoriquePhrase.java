@@ -52,7 +52,7 @@ public class HistoriquePhrase extends Activity {
 
         //vient du main avec clique sur le bouton TOUTES LES HISTOIRES
         if(histo.equals("all")){
-            listeHistoire = cadavreExquisBDD.getAllHistoire();
+            listeHistoire = cadavreExquisBDD.getCompleteHistoireList();
             texteTitre.setText("Toutes les histoires");
 
         }
