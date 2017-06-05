@@ -89,8 +89,6 @@ public class EvaluationScreen extends Activity {
             }
 
             add_comm.setText(comm);
-
-
         }
         else
         {

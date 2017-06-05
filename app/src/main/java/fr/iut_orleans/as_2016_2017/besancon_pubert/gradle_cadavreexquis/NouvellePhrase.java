@@ -3,9 +3,12 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -46,7 +49,9 @@ public class NouvellePhrase extends Activity
         if(histoire != null){
             ((TextView) findViewById(R.id.txtinput_newtitle)).setText(histoire.getTitre());
             ((TextView) findViewById(R.id.txtinput_newtitle)).setEnabled(false);
-            ((TextView) findViewById(R.id.lbl_story)).setText(cadavreExquisBDD.getLastTexteFrom(histoire.getId()).getContenu());
+            ((TextView) findViewById(R.id.txtinput_newtitle)).setTextColor(Color.BLACK);
+
+            ((TextView) findViewById(R.id.lbl_story)).setText(histoire.getTextes().get(histoire.getTextes().size()-1).getContenu());
         } // Sinon, on ne fait rien, le texte par defaut est dejà là.
     }
 
@@ -66,7 +71,7 @@ public class NouvellePhrase extends Activity
             cadavreExquisBDD.insertTexte(new Texte(new Date(System.currentTimeMillis()), phraseUtilisateur, utilisateur.getId(), histoire.getId()));
             this.finish();
         } else {
-            Toast.makeText(this, "Il vous manque quelque-chose ... Reverifiez ! ", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Il vous manque quelque-chose ... Reverifiez ! ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -74,36 +79,6 @@ public class NouvellePhrase extends Activity
         this.finish();
     }
 
-
-    public String getTitleFromAlertBox(){
-
-        final String[] titre = {""};
-
-        final EditText edittext = new EditText(this);
-        edittext.setText("Write the new title here.");
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("This new story needs a name !");
-        alert.setTitle("Story Title");
-
-        alert.setView(edittext);
-
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-                titre[0] = edittext.getText().toString();
-            }
-        });
-
-        alert.setNegativeButton("Back", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // what ever you want to do with No option.
-            }
-        });
-
-        alert.show();
-
-        return titre[0];
-    }
 
     @Override
     public void finish() {

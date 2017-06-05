@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,10 @@ public class HistoriquePhrase extends Activity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.historique);
 
+        // Ouverture de la BDD
+        cadavreExquisBDD = new CadavreExquisBDD(this);
+        cadavreExquisBDD.open();
+
         Intent intentId = getIntent ();
         String histo = intentId.getStringExtra("historique");
         idUser = Integer.parseInt(intentId.getStringExtra("idUser"));
@@ -47,8 +52,7 @@ public class HistoriquePhrase extends Activity {
 
         listeElem = new ArrayList<String>();
 
-        cadavreExquisBDD = new CadavreExquisBDD(this);
-        cadavreExquisBDD.open();
+
 
         //vient du main avec clique sur le bouton TOUTES LES HISTOIRES
         if(histo.equals("all")){
@@ -63,7 +67,6 @@ public class HistoriquePhrase extends Activity {
             texteTitre.setText("Mes histoires");
         }
 
-        cadavreExquisBDD.close();
         for(Histoire titre : listeHistoire)
             listeElem.add(titre.getTitre());
 
@@ -76,16 +79,25 @@ public class HistoriquePhrase extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Histoire histoire = listeHistoire.get(i);
-                intent.putExtra("idHistoire",Integer.toString(histoire.getId()));
-                intent.putExtra("idUser",Integer.toString(idUser));
-                startActivityForResult(intent,1);
+                if(cadavreExquisBDD.getTextesArrayListWithHistoireID(histoire.getId()).size()>=5){
+                    intent.putExtra("idHistoire",Integer.toString(histoire.getId()));
+                    intent.putExtra("idUser",Integer.toString(idUser));
+                    startActivityForResult(intent,1);
+                }
+                else{
+                    Toast.makeText(HistoriquePhrase.this, "Cette histoire n'est pas terminée ! Patience !", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
     }
 
 
-
-
+    @Override
+    public void finish(){
+        cadavreExquisBDD.close();
+        super.finish();
+    }
 
 }

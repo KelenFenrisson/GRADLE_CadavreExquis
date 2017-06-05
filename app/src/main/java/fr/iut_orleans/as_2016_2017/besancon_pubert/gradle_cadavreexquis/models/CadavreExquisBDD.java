@@ -479,7 +479,6 @@ public class CadavreExquisBDD {
         Float avg = null;
         Cursor c = this.sqliteDatabase.rawQuery(String.format("SELECT avg(%1$s) FROM %2$s WHERE %3$s = %4$s;", NOTE_EVALUER, TABLE_EVALUER, ID_HISTOIRE, id_histoire), null, null);
         if(c.moveToFirst()) {
-            Log.i("cadavre_exquis", c.toString());
             avg = Float.parseFloat(c.getString(0));
         }
         return avg;
