@@ -76,13 +76,43 @@ public class LoginScreen extends Activity
 
     @Override
     public void onActivityResult (int requestcode, int resultcode, Intent intent ) {
-        if(requestcode==2) {
-            super.onActivityResult(requestcode, resultcode, intent);
-            String message = intent.getStringExtra("deco");
-            Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-            toast.show();
-            ((EditText) findViewById(R.id.txtinput_login)).setText("");
-            ((EditText) findViewById(R.id.txtinput_password)).setText("");
+
+        super.onActivityResult(requestcode, resultcode, intent);
+
+        switch(requestcode){
+
+
+            case 1 : // RETOUR DE L'INSCRITPION
+                switch(resultcode){
+                    case RESULT_OK :
+                        Toast.makeText(this, "Votre compte a bien été créé.", Toast.LENGTH_SHORT).show();
+                        break;
+                    case RESULT_CANCELED :
+                        Toast.makeText(this, "Inscription annulée", Toast.LENGTH_SHORT).show();
+                        break;
+                    default :
+                        Toast.makeText(this, "Une anomalie est survenue. Veuillez refaire votre inscription.", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
+
+
+
+            case 2 : // RETOUR DE LA DECONNEXION
+                switch(resultcode){
+                    case RESULT_OK :
+                        String message = intent.getStringExtra("deco");
+                        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+                        toast.show();
+                        ((EditText) findViewById(R.id.txtinput_login)).setText("");
+                        ((EditText) findViewById(R.id.txtinput_password)).setText("");
+                        break;
+                    case RESULT_CANCELED :
+                        Toast.makeText(this, "Une anomalie est survenue. Vous n'êtes pas deconnecté", Toast.LENGTH_SHORT).show();
+                        break;
+                    default: break;
+                }
+                break;
         }
     }
 

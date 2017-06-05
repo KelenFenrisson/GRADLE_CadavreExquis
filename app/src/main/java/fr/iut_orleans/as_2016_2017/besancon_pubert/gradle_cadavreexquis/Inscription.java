@@ -44,6 +44,7 @@ public class Inscription extends Activity
             Utilisateur utilisateur = new Utilisateur(textLogin,textPassword);
             cadavreExquisBDD.insertUtilisateur(utilisateur);
             cadavreExquisBDD.close();
+            setResult(RESULT_OK);
             super.finish ();
         }
     }
@@ -52,8 +53,6 @@ public class Inscription extends Activity
     @Override
     public void finish ()
     {
-        Intent intent = new Intent ();
-        setResult(Activity.RESULT_OK , intent );
         super.finish ();
     }
 

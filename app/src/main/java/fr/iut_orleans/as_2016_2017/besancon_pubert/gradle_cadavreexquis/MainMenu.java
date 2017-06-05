@@ -57,7 +57,7 @@ public class MainMenu extends Activity
         Intent intent = new Intent ();
         intent.putExtra("deco", "Déconnexion");
         setResult(Activity.RESULT_OK , intent );
-        super.finish ();
+        this.finish();
     }
 
     @Override
@@ -65,7 +65,6 @@ public class MainMenu extends Activity
     {
         Intent intent = new Intent ();
         intent.putExtra("deco", "Déconnexion");
-        setResult(Activity.RESULT_OK , intent );
         super.finish ();
     }
 }
