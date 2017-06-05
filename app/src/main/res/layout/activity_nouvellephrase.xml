@@ -34,7 +34,7 @@
         android:id="@+id/txtinp_usersentence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.35"
+        android:layout_weight="0.17"
         android:ems="10"
         android:inputType="textMultiLine"
         android:text="@string/app_writeyoursentence" />

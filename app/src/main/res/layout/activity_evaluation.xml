@@ -40,8 +40,8 @@
         android:id="@+id/textHistoireComplette"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:text="L'histoire complette" />
+        android:text="L'histoire complète"
+        android:textSize="15sp" />
 
     <Space
         android:layout_width="match_parent"

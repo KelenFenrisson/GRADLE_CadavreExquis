@@ -71,7 +71,7 @@ public class NouvellePhrase extends Activity
             cadavreExquisBDD.insertTexte(new Texte(new Date(System.currentTimeMillis()), phraseUtilisateur, utilisateur.getId(), histoire.getId()));
             this.finish();
         } else {
-            Toast.makeText(this, "Il vous manque quelque-chose ... Reverifiez ! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Avez vous ecrit quelque chose ?", Toast.LENGTH_SHORT).show();
         }
     }
 
