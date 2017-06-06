@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class EvaluationScreen extends Activity {
     Intent intentAuto;
     Evaluation evaluat;
     EditText comm;
+    TextView commTitre;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class EvaluationScreen extends Activity {
         Intent intent = getIntent();
 
         idHistoire = Integer.parseInt(intent.getStringExtra("idHistoire"));
+        noteUser=-1;
+
 
         idUser = Integer.parseInt(intent.getStringExtra("idUser"));
         TextView texteUser = (TextView) findViewById(R.id.textUser);
@@ -52,7 +56,7 @@ public class EvaluationScreen extends Activity {
         TextView texteHistoire = (TextView) findViewById(R.id.textHistoireComplette);
         TextView texteNote = (TextView) findViewById(R.id.textNote);
         RadioGroup groupeRadioBoutton = (RadioGroup) findViewById(R.id.groupRadioButtonAll);
-        TextView commTitre = (TextView) findViewById(R.id.commentaireAll);
+        commTitre = (TextView) findViewById(R.id.commentaireAll);
 
         TextView add_comm = (TextView) findViewById(R.id.commentaireUser);
         comm = (EditText)findViewById(R.id.Add_commentaire);
@@ -104,7 +108,6 @@ public class EvaluationScreen extends Activity {
     public void onRadioButtonClicked(View view) {
 
         boolean checked = ((RadioButton) view).isChecked();
-        noteUser=0;
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.noteButton0:
@@ -138,18 +141,26 @@ public class EvaluationScreen extends Activity {
     }
 
     public void ajouterEval(View view){
-        Date date = new Date();
 
-        evaluat.setDateEvaluation(date);
-        evaluat.setCommentaire(comm.getText().toString());
-        evaluat.setHistoire_id(idHistoire);
-        evaluat.setUtilisateur_id(idUser);
+        if(noteUser==-1)
+            Toast.makeText(this, "Vous n'avez pas noté l'histoire", Toast.LENGTH_LONG).show();
+        else if (comm.getText().toString().equals(""))
+            Toast.makeText(this, "Vous n'avez pas ajouté de commentaire", Toast.LENGTH_LONG).show();
+        else {
+            Date date = new Date();
+
+            evaluat.setDateEvaluation(date);
+            evaluat.setCommentaire(comm.getText().toString());
+            evaluat.setHistoire_id(idHistoire);
+            evaluat.setUtilisateur_id(idUser);
 
 
-        cadavreExquisBDD.open();
-        cadavreExquisBDD.insertEvaluation(evaluat);
-        cadavreExquisBDD.close();
-        super.finish();
+            cadavreExquisBDD.open();
+            cadavreExquisBDD.insertEvaluation(evaluat);
+            cadavreExquisBDD.close();
+            super.finish();
+
+        }
     }
 
 
