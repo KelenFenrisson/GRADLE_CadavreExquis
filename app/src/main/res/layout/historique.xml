@@ -16,11 +16,22 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="54dp" />
+        android:layout_height="40dp" />
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="253dp"
         android:id="@+id/listeViewHistorique"
         />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <Button
+        android:id="@+id/retourButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retour page précédente"
+        android:onClick="pagePrec"/>
 </LinearLayout>

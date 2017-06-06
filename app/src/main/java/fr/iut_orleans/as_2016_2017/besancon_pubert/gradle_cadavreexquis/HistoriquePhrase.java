@@ -68,7 +68,7 @@ public class HistoriquePhrase extends Activity {
         }
 
         for(Histoire titre : listeHistoire)
-            listeElem.add(titre.getTitre());
+            listeElem.add(titre.getTitre()+"      Progression : "+cadavreExquisBDD.getTextesArrayListWithHistoireID(titre.getId()).size()+"/5");
 
         //association adapteur avec la listeview
         adapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, listeElem);
@@ -93,6 +93,9 @@ public class HistoriquePhrase extends Activity {
 
     }
 
+    public void pagePrec(View view ){
+        this.finish();
+    }
 
     @Override
     public void finish(){
