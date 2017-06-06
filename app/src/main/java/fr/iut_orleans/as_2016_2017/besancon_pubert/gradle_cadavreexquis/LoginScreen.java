@@ -2,6 +2,7 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ public class LoginScreen extends Activity
 
     int idUser;
     CadavreExquisBDD cadavreExquisBDD;
+    SharedPreferences perso;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -35,6 +37,18 @@ public class LoginScreen extends Activity
 
 //        Log.i(getResources().getString(R.string.app_name), "LoginScreen.onCreate(Bundle savedInstanceState) - recuperation du bundle :\n"+savedInstanceState);
 
+        perso = getPreferences(MODE_PRIVATE);
+
+
+        if(perso.getString("login",null)!=null){
+            Utilisateur user = cadavreExquisBDD.getUtilisateurWithLogin(perso.getString("login",null));
+
+            ((EditText)findViewById(R.id.txtinput_login)).setText(user.getLogin());
+            ((EditText)findViewById(R.id.txtinput_password)).setText(user.getMotDePasse());
+
+        }
+
+
     }
 
     public void onLogInClick(View view){
@@ -47,6 +61,8 @@ public class LoginScreen extends Activity
 //        Log.i("test", "LoginScreen test connexion");
 
         if(checkCredentials(login, password)){
+            perso.edit().putString("login",login).commit();
+
             Intent intent = new Intent (this,MainMenu.class);
             intent.putExtra("idUser", Integer.toString(idUser));
             setResult(Activity.RESULT_OK , intent );
@@ -104,8 +120,6 @@ public class LoginScreen extends Activity
                         String message = intent.getStringExtra("deco");
                         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
                         toast.show();
-                        ((EditText) findViewById(R.id.txtinput_login)).setText("");
-                        ((EditText) findViewById(R.id.txtinput_password)).setText("");
                         break;
                     case RESULT_CANCELED :
                         Toast.makeText(this, "Une anomalie est survenue. Vous n'êtes pas deconnecté", Toast.LENGTH_SHORT).show();
