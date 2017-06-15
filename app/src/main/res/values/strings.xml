@@ -18,7 +18,7 @@
     <string name="app_newstory">New Story</string>
     <string name="app_storytitle">Story Title</string>
     <string name="app_writeyoursentence">Write your sentence here ...</string>
-    <string name="app_newstorytodo">Lucky you ! you\'re starting a brand new story ! Don't forget to modify the default title !</string>
+    <string name="app_newstorytodo">Lucky you ! you\'re starting a brand new story ! Don\'t forget to modify the default title !</string>
     <string name="app_inputnewtitle">Give this new story a cool title !</string>
     <string name="app_comments">Comments</string>
 </resources>

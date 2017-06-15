@@ -2,6 +2,7 @@ package fr.iut_orleans.as_2016_2017.besancon_pubert.gradle_cadavreexquis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +17,7 @@ public class MainMenu extends Activity
     int idUser;
     Utilisateur user;
     CadavreExquisBDD cadavreExquisBDD;
-
+    SharedPreferences perso;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -31,6 +32,7 @@ public class MainMenu extends Activity
         String message = "Session de "+user.getLogin();
         TextView texte = (TextView)findViewById(R.id.textView);
         texte.setText(message);
+        perso = getPreferences(MODE_PRIVATE);
     }
 
     public void jouer(View view){
@@ -67,4 +69,5 @@ public class MainMenu extends Activity
         intent.putExtra("deco", "Déconnexion");
         super.finish ();
     }
+
 }
